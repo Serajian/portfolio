@@ -41,7 +41,6 @@ export interface Project {
   code: string;
   title: string;
   body: string;
-  stack: string;
   /** null when the work has no public URL — the card renders unlinked */
   href: string | null;
 }
@@ -284,8 +283,9 @@ export const site = {
     overline: '// 05 — selected work',
     heading: { lead: 'Selected', dim: 'work' },
     /* A backend portfolio has nothing to screenshot, so each card states the
-       constraint, what was built and the stack. The product is context; the
-       system is the work. */
+       constraint and what was built. The product is context; the system is
+       the work. No stack line — the list would be the same handful of names
+       on every card. */
     note: 'A selection — these are the ones with a public URL. Most of what I build never gets one.',
     scrollHint: '↔ scroll',
     items: [
@@ -293,42 +293,36 @@ export const site = {
         code: '001 / SHORTS',
         title: 'Aparat Shorts',
         body: 'The backend behind a Reels-style short-video feed — upload, processing and delivery. Carries 100k+ uploads a day and had to stay predictable while the product shipped weekly.',
-        stack: 'Go · Microservices',
         href: 'https://www.aparat.com/shorts',
       },
       {
         code: '002 / GAME CLUB',
         title: 'Game Club — Aparat Sport',
         body: 'A gamification platform on top of live sports: scoring, predictions, quizzes, missions, leagues and rankings for 3M+ users. Event-driven on Kafka and built for the spike that lands the second a match kicks off.',
-        stack: 'Go · Kafka',
         href: 'https://www.aparatsport.ir/',
       },
       {
         code: '003 / CAST',
         title: 'Apollo Cast',
         body: 'A real-time service that turns a phone into a remote and a TV into a screen. WebSocket transport with device pairing and state sync, where anything past a few hundred milliseconds is felt rather than measured.',
-        stack: 'Go · WebSocket',
         href: null,
       },
       {
         code: '004 / CHAT',
         title: 'Chat Service',
         body: 'Messaging across channels: chat APIs and workflows on WebSocket and event-driven patterns, holding 800k+ concurrent connections without the tail latency creeping up.',
-        stack: 'Go · WebSocket',
         href: null,
       },
       {
         code: '005 / WISHLY',
         title: 'Wishly',
         body: 'My own product. Wishlists and birthday reminders — friends see what you actually want, without spoilers or duplicates, and get nudged by email or SMS a few days ahead. Three languages, Persian included.',
-        stack: 'Go',
         href: 'https://wishly.info',
       },
       {
         code: '006 / GOV',
         title: 'National education platforms',
         body: "National-scale services for Iran's largest government organisation: financial aid, loans, registration and core administrative systems. The requirement that shaped every decision was that they cannot go down.",
-        stack: 'Go · Microservices',
         href: null,
       },
     ] satisfies Project[],

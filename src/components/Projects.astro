@@ -37,8 +37,10 @@ const since = `${CAREER_START.year}-${CAREER_START.month}`;
               <h3>{p.title}</h3>
               <p>{p.body}</p>
               <span class="foot">
-                {p.stack}
-                {p.href ? <em>↗</em> : <em class="private">internal</em>}
+                {/* the destination is more use here than a stack list that
+                    would repeat the same names on every card */}
+                {p.href ? new URL(p.href).hostname.replace(/^www\./, '') : ''}
+                {p.href ? <em>↗</em> : <em class="private">not public</em>}
               </span>
             </Tag>
           );
