@@ -35,6 +35,20 @@ is enough: the next build re-encodes it to webp at three widths. A cut-out with
 a transparent background works best — the frame is landscape and the subject is
 bottom-aligned inside it, not cropped. The file must exist or the build fails.
 
+## The social card
+
+`public/og.png` is what Telegram, LinkedIn and WhatsApp show when the link is
+shared. It is generated, not hand-drawn:
+
+```bash
+node scripts/make-og.mjs
+```
+
+Re-run it after changing the name, role or domain — the strings at the top of
+that script are kept in step with `src/data/site.ts` by hand, since it runs
+rarely. `robots.txt` and `sitemap.xml` are generated at build time from the
+canonical domain, so they can never drift out of sync.
+
 ## Commands
 
 ```bash

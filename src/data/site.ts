@@ -66,7 +66,9 @@ export const site = {
        title on the internet; backend is what makes someone write to you —
        and the hero typewriter already cycles the broader ones. */
     role: 'Senior Backend Engineer',
-    title: 'Mohsen Serajian — Senior Backend Developer',
+    /* keep in step with `role` — it shows up in the tab, search results and
+       every social card */
+    title: 'Mohsen Serajian — Senior Backend Engineer',
     description:
       'Senior backend developer building Go services at the scale of millions of users — event-driven systems, real-time backends and high-throughput pipelines.',
     // sidebar logo: rendered as ~/handle

@@ -10,7 +10,32 @@ interface Props {
 }
 
 const { title = site.meta.title, description = site.meta.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? site.meta.url).href;
+
+const base = Astro.site ?? new URL(site.meta.url);
+const canonical = new URL(Astro.url.pathname, base).href;
+/* social cards need an absolute URL — a relative one silently shows nothing */
+const ogImage = new URL('/og.png', base).href;
+
+/* Tells search engines this site is a person rather than a company, and ties
+   the name to the profiles that confirm it. */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.meta.name,
+  url: base.href,
+  image: ogImage,
+  jobTitle: site.meta.role,
+  description,
+  email: `mailto:${site.contact.links.find((l) => l.label === 'Email')?.value ?? ''}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Dubai',
+    addressCountry: 'AE',
+  },
+  knowsLanguage: ['fa', 'en'],
+  knowsAbout: site.skills.groups.flatMap((g) => g.items).slice(0, 20),
+  sameAs: site.socials.filter((s) => s.href.startsWith('http')).map((s) => s.href),
+};
 ---
 
 <!doctype html>
@@ -22,16 +47,30 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.meta.url).href;
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={site.meta.name} />
     <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={site.meta.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={`${site.meta.name} — ${site.meta.role}`} />
+
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <meta name="theme-color" content="#05070c" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
   </head>
 
   <body>
