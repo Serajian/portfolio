@@ -348,6 +348,8 @@ body.hot .cur-ring {
   font-size: 19px;
   color: var(--bright);
   text-decoration: none;
+  /* the blinking caret was wrapping onto its own line in the mobile bar */
+  white-space: nowrap;
 }
 .logo .tilde {
   color: var(--accent);
@@ -1605,13 +1607,19 @@ h1 .ln.g::after {
 @media (max-width: 620px) {
   .cinfo a {
     flex-wrap: wrap;
-    gap: 10px 12px;
+    gap: 8px 12px;
+    padding: 18px 4px;
   }
   .cinfo a k {
     width: auto;
   }
   .cinfo a .val {
     flex-basis: 100%;
+  }
+  /* the arrow only appears on hover, which touch does not have — but it was
+     still taking a third line under the wrapped value */
+  .cinfo a em {
+    display: none;
   }
 }
 footer {
@@ -1665,15 +1673,31 @@ footer a:hover {
   .cur-dot,
   .cur-ring { display: none; }
   .rail {
+    /* top: 0 matters — a sticky element with no inset never actually sticks,
+       so the nav used to scroll away and never come back */
     position: sticky;
+    top: 0;
     width: 100%;
     height: auto;
     flex-direction: row;
     align-items: center;
-    padding: 14px 20px;
+    gap: 12px;
+    padding: 8px 14px;
     border-right: none;
     border-bottom: 1px solid var(--line);
+    background: rgb(7 10 17 / 0.92);
+    backdrop-filter: blur(12px);
   }
+  /* scroll progress becomes a line under the bar rather than down its edge */
+  .rail::before {
+    top: auto;
+    bottom: -1px;
+    left: 0;
+    right: auto;
+    width: var(--progress, 0%);
+    height: 2px;
+  }
+  .logo { font-size: 16px; }
   .rail .role,
   .rail-foot { display: none; }
   nav {
@@ -1681,14 +1705,24 @@ footer a:hover {
     flex-direction: row;
     gap: 0;
     overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
   }
-  nav a { padding: 8px 10px; font-size: 11px; }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    /* without flex:none the labels get squeezed and clipped mid-word */
+    flex: none;
+    white-space: nowrap;
+    padding: 10px 9px;
+    font-size: 11px;
+  }
+  nav a:hover { transform: none; }
   nav a .n { display: none; }
   nav a::before {
-    left: 12px;
-    right: 12px;
+    left: 10px;
+    right: 10px;
     top: auto;
-    bottom: 2px;
+    bottom: 3px;
     width: auto;
     height: 0 !important;
     translate: 0;
@@ -1697,6 +1731,17 @@ footer a:hover {
   main,
   footer { margin-left: 0; }
   .sec { padding-top: 86px; padding-bottom: 86px; }
+  /* the 220px rule after the overline squeezed the label into two lines */
+  .overline { white-space: nowrap; }
+  .in .overline::after { width: 56px; }
+  /* the longest role pushes fmt.Println past one line at this width; the
+     reserved height stops the block jumping as the string types in and out */
+  .typer {
+    font-size: 0.9rem;
+    height: auto;
+    min-height: 3.2em;
+    line-height: 1.6;
+  }
   .cards { grid-template-columns: 1fr; }
   .skill-group {
     grid-template-columns: 1fr;
