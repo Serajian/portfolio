@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
 
 const { contact, nav } = site;
@@ -19,8 +20,14 @@ const formAttrs = contact.form.endpoint
     <div class="cinfo rv">
       {
         contact.links.map((link) => (
-          <a href={link.href}>
-            <k>{link.label}</k> {link.value}
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            <Icon name={link.icon} size={16} />
+            <k>{link.label}</k>
+            {link.value}
           </a>
         ))
       }

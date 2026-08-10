@@ -8,6 +8,7 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+import type { IconName } from '../components/Icon.astro';
 import { CAREER_START } from '../lib/experience';
 
 export interface NavItem {
@@ -49,13 +50,13 @@ export interface ContactLink {
   label: string;
   value: string;
   href: string;
+  icon: IconName;
 }
 
 export interface Social {
-  /** 2–3 characters shown in the sidebar */
-  label: string;
   title: string;
   href: string;
+  icon: IconName;
 }
 
 export const site = {
@@ -349,14 +350,27 @@ export const site = {
         label: 'Email',
         value: 'serajian.mohsen@gmail.com',
         href: 'mailto:serajian.mohsen@gmail.com',
+        icon: 'mail',
+      },
+      {
+        label: 'Telegram',
+        value: '@mohsenserajian',
+        href: 'https://t.me/mohsenserajian',
+        icon: 'telegram',
       },
       {
         label: 'LinkedIn',
         value: 'in/mohsen-serajian',
         href: 'https://linkedin.com/in/mohsen-serajian',
+        icon: 'linkedin',
       },
-      { label: 'GitHub', value: 'github.com/Serajian', href: 'https://github.com/Serajian' },
-      { label: 'Location', value: 'Dubai, UAE', href: '#' },
+      {
+        label: 'GitHub',
+        value: 'github.com/Serajian',
+        href: 'https://github.com/Serajian',
+        icon: 'github',
+      },
+      { label: 'Location', value: 'Dubai, UAE', href: '#', icon: 'location' },
     ] satisfies ContactLink[],
     form: {
       filename: 'message.sh',
@@ -372,9 +386,10 @@ export const site = {
 
   /* ─────────── sidebar socials + footer ─────────── */
   socials: [
-    { label: 'GH', title: 'GitHub', href: 'https://github.com/Serajian' },
-    { label: 'IN', title: 'LinkedIn', href: 'https://linkedin.com/in/mohsen-serajian' },
-    { label: '@', title: 'Email', href: 'mailto:serajian.mohsen@gmail.com' },
+    { title: 'GitHub', href: 'https://github.com/Serajian', icon: 'github' },
+    { title: 'LinkedIn', href: 'https://linkedin.com/in/mohsen-serajian', icon: 'linkedin' },
+    { title: 'Telegram', href: 'https://t.me/mohsenserajian', icon: 'telegram' },
+    { title: 'Email', href: 'mailto:serajian.mohsen@gmail.com', icon: 'mail' },
   ] satisfies Social[],
 
   footer: {

@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 ---
 
 <aside class="rail">
@@ -27,8 +28,14 @@ import { site } from '../data/site';
     <div class="socials">
       {
         site.socials.map((s) => (
-          <a href={s.href} title={s.title} target="_blank" rel="noopener noreferrer">
-            {s.label}
+          <a
+            href={s.href}
+            title={s.title}
+            aria-label={s.title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name={s.icon} size={17} />
           </a>
         ))
       }

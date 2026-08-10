@@ -508,16 +508,28 @@ nav a.on .n {
 }
 .socials {
   display: flex;
-  gap: 14px;
+  gap: 6px;
 }
 .socials a {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
   text-decoration: none;
   color: var(--muted);
-  transition: 0.2s;
+  transition: color 0.2s, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s,
+    background 0.25s;
 }
 .socials a:hover {
   color: var(--accent);
   transform: translateY(-3px);
+  border-color: hsl(var(--hue) 80% 60% / 0.3);
+  background: hsl(var(--hue) 80% 55% / 0.08);
+}
+.socials svg {
+  display: block;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1577,9 +1589,18 @@ h1 .ln.g::after {
   width: 74px;
   flex: none;
 }
+.cinfo a svg {
+  flex: none;
+  color: var(--muted);
+  transition: color 0.25s;
+}
 .cinfo a:hover {
   color: var(--accent);
   padding-left: 12px;
+}
+.cinfo a:hover svg,
+.cinfo a:hover k {
+  color: var(--accent);
 }
 .field {
   display: flex;
