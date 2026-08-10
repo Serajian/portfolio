@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: replace with the real domain once it's pointed at the server
-  site: 'https://example.com',
+  // canonical domain — serajianmohsen.ir is an alias that redirects here
+  site: 'https://mohsenserajian.ir',
   output: 'static',
   build: {
     inlineStylesheets: 'auto',

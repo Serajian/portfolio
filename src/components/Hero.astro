@@ -19,17 +19,12 @@ const hue = nav.find((n) => n.id === 'home')?.hue ?? 186;
       }
     </h1>
 
-    <div class="typer">
-      <span class="kw">const</span> role = <span class="str">"<b
-        id="tw"
-        data-roles={JSON.stringify(hero.roles)}></b></span><span class="cur"></span>
-    </div>
+    <div class="fa" lang="fa" dir="rtl">{hero.nameFa}</div>
 
-    <div class="cta">
-      <a class="btn mag" href={hero.primaryCta.href}><span>{hero.primaryCta.label}</span></a>
-      <a class="btn solid mag" href={hero.secondaryCta.href}>
-        <span>{hero.secondaryCta.label}</span>
-      </a>
+    <div class="typer">
+      <span class="f">fmt</span>.<span class="fn">Println</span>(<span class="str"
+        >"<b id="tw" data-roles={JSON.stringify(hero.roles)}></b></span
+      ><span class="cur"></span><span class="str">"</span>)
     </div>
   </div>
 

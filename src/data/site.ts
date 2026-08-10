@@ -77,8 +77,10 @@ export const site = {
       'Backend engineer building APIs, distributed systems and data pipelines in Go.',
     // sidebar logo: rendered as ~/handle
     handle: 'mohsen',
-    // TODO: absolute URL of the deployed site (also set `site` in astro.config.mjs)
-    url: 'https://example.com',
+    /** canonical domain — keep in sync with `site` in astro.config.mjs */
+    url: 'https://mohsenserajian.ir',
+    /** points at the canonical one; nginx 301s it */
+    aliasDomain: 'serajianmohsen.ir',
     /** shown next to the pulsing green dot in the sidebar */
     availability: 'available for work',
   },
@@ -95,14 +97,23 @@ export const site = {
 
   /* ─────────── hero ─────────── */
   hero: {
-    // TODO: the shell prompt line above the name
-    prompt: 'mohsen@tehran:~',
+    prompt: 'mohsen@serajian:~',
     /** the name, split into lines — the second line gets the gradient */
     lines: ['Mohsen', 'Serajian'],
-    /** cycled by the typewriter */
-    roles: ['Backend Engineer', 'Go Developer', 'Systems Nerd', 'Freelancer'],
-    primaryCta: { label: 'View projects', href: '#projects' },
-    secondaryCta: { label: 'Get in touch', href: '#contact' },
+    /**
+     * Persian name under the latin one. Rendered small and dim, revealed
+     * right-to-left. Never split into characters — Persian is a connected
+     * script and per-letter spans would break the joining forms.
+     */
+    nameFa: 'محسن سراجیان',
+    /** cycled by the typewriter inside fmt.Println() */
+    roles: [
+      "I'm a backend developer",
+      "I'm a software engineer",
+      "I'm a blockchain developer",
+      "I'm a distributed systems engineer",
+      "I'm a freelancer",
+    ],
   },
 
   /* ─────────── the infinite marquee under the hero ─────────── */

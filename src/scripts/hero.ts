@@ -15,7 +15,18 @@ export function revealHero(): void {
     });
   });
 
-  $$<HTMLElement>('.hero .prompt,.hero .typer,.hero .cta,.hero .scroll-cue').forEach((el, i) => {
+  // the Persian line reveals on its own timing, after the name has landed
+  const fa = $<HTMLElement>('.hero .fa');
+  if (fa) {
+    if (reducedMotion()) {
+      fa.style.opacity = '1';
+      fa.style.clipPath = 'none';
+    } else {
+      window.setTimeout(() => fa.classList.add('shown'), 900);
+    }
+  }
+
+  $$<HTMLElement>('.hero .prompt,.hero .typer,.hero .scroll-cue').forEach((el, i) => {
     el.style.opacity = '0';
     el.animate(
       [

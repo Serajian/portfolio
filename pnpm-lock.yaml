@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/vazirmatn':
+        specifier: ^5.3.0
+        version: 5.3.0
       astro:
         specifier: ^5.14.1
         version: 5.18.2(rollup@4.62.4)(typescript@5.9.3)(yaml@2.9.0)
@@ -415,6 +418,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/vazirmatn@5.3.0':
+    resolution: {integrity: sha512-XC/2yN2r5gwhFT3klSuWaqncODX2DOfRYfNmbyzgtWYxHxMC+tcoaX+tgggrm6hSkEgpR1TuSDEf1PiI91G7qg==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2260,6 +2266,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.7':
     optional: true
+
+  '@fontsource/vazirmatn@5.3.0': {}
 
   '@img/colour@1.1.0':
     optional: true
