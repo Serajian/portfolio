@@ -321,7 +321,11 @@ body.hot .cur-ring {
   top: 0;
   bottom: 0;
   width: var(--rail);
-  z-index: 40;
+  /* above .scan (55) and .vig (56). The vignette is anchored to the top of
+     the viewport, so it was laying 70% black over the bottom of the rail —
+     exactly where the status, socials and sound toggle sit. The rail is
+     chrome, not part of the artwork, so it opts out. */
+  z-index: 57;
   background: linear-gradient(180deg, rgb(10 13 20 / 0.9), rgb(5 7 12 / 0.92));
   backdrop-filter: blur(14px);
   border-right: 1px solid var(--line);
@@ -370,10 +374,12 @@ body.hot .cur-ring {
 .role {
   font-family: var(--mono);
   font-size: 10.5px;
-  letter-spacing: 0.18em;
+  /* 0.18em left it a pixel short of wrapping — this keeps a real margin */
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 10px;
+  white-space: nowrap;
 }
 
 nav {
@@ -482,35 +488,34 @@ nav a.on .n {
     box-shadow: 0 0 0 0 rgb(158 206 106 / 0);
   }
 }
-.snd {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 8px 10px;
-  margin-bottom: 14px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: none;
-  transition: 0.25s;
-}
-.snd:hover {
-  color: var(--accent);
-  border-color: hsl(var(--hue) 80% 60% / 0.4);
-}
-.snd.off {
-  opacity: 0.45;
-}
 .socials {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
-.socials a {
+/* the sound toggle lives in the same row as the socials and shares their
+   shape — it was a full-width labelled button taking more room than it earned */
+.socials .snd {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0;
+  cursor: none;
+}
+.socials .snd .off {
+  display: none;
+}
+.socials .snd.off .on {
+  display: none;
+}
+.socials .snd.off .off {
+  display: block;
+}
+.socials .snd.off {
+  color: #4a5470;
+}
+.socials a,
+.socials .snd {
   display: grid;
   place-items: center;
   width: 32px;
@@ -522,7 +527,8 @@ nav a.on .n {
   transition: color 0.2s, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s,
     background 0.25s;
 }
-.socials a:hover {
+.socials a:hover,
+.socials .snd:hover {
   color: var(--accent);
   transform: translateY(-3px);
   border-color: hsl(var(--hue) 80% 60% / 0.3);

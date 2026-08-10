@@ -24,7 +24,6 @@ import Icon from './Icon.astro';
   <div class="rail-foot">
     <div class="pctread"><span id="pv">00</span><s>%</s></div>
     <div class="status"><span class="dot"></span> {site.meta.availability}</div>
-    <button class="snd" id="snd" type="button">♪ sound: on</button>
     <div class="socials">
       {
         site.socials.map((s) => (
@@ -39,6 +38,10 @@ import Icon from './Icon.astro';
           </a>
         ))
       }
+      <button class="snd" id="snd" type="button" title="Sound on" aria-label="Sound on">
+        <span class="on"><Icon name="sound-on" size={17} /></span>
+        <span class="off"><Icon name="sound-off" size={17} /></span>
+      </button>
     </div>
   </div>
 </aside>

@@ -85,8 +85,10 @@ export function initSound(): void {
   if (!btn) return;
   btn.addEventListener('click', () => {
     const on = sound.toggle();
-    btn.textContent = `♪ sound: ${on ? 'on' : 'off'}`;
     btn.classList.toggle('off', !on);
+    const label = on ? 'Sound on' : 'Sound off';
+    btn.setAttribute('title', label);
+    btn.setAttribute('aria-label', label);
     if (on) sound.click();
   });
 

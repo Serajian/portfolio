@@ -62,7 +62,10 @@ export const site = {
   /* ─────────── identity / <head> ─────────── */
   meta: {
     name: 'Mohsen Serajian',
-    role: 'Senior Backend Developer · Go',
+    /* Kept to one line in the rail. "Software Engineer" is the most common
+       title on the internet; backend is what makes someone write to you —
+       and the hero typewriter already cycles the broader ones. */
+    role: 'Senior Backend Engineer',
     title: 'Mohsen Serajian — Senior Backend Developer',
     description:
       'Senior backend developer building Go services at the scale of millions of users — event-driven systems, real-time backends and high-throughput pipelines.',
