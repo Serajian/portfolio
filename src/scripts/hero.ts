@@ -101,23 +101,69 @@ export function measureHero(): void {
   });
 }
 
-/** Letters lift and glow as the pointer passes over the name. */
+/** how far each glyph drifts in the idle wave */
+const BOB = 5;
+
+/**
+ * Two things at once: an idle wave that runs whether or not anyone is
+ * touching the mouse, and a lift/glow that follows the pointer. Both end up
+ * in the same custom property so they never overwrite each other.
+ */
 export function updateHero(): void {
   if (!glyphs.length) return;
   // the name only exists in the first viewport; skip the work below it
   if (window.scrollY > window.innerHeight * 1.2) return;
 
+  const t = performance.now() / 1000;
   const px = pointer.x;
   const py = pointer.y + window.scrollY;
 
-  glyphs.forEach((g) => {
-    const d = Math.hypot(g.cx - px, g.cy - py);
-    const f = clamp(1 - d / REACH, 0, 1);
-    const eased = f * f;
-    g.inner.style.setProperty('--lift', `${(-eased * LIFT).toFixed(2)}px`);
+  glyphs.forEach((g, i) => {
+    let eased = 0;
+    if (pointer.live) {
+      const d = Math.hypot(g.cx - px, g.cy - py);
+      const f = clamp(1 - d / REACH, 0, 1);
+      eased = f * f;
+    }
+    // phase offset per glyph turns the bob into a wave travelling along the name
+    const bob = Math.sin(t * 1.5 + i * 0.55) * BOB;
+    g.inner.style.setProperty('--lift', `${(bob - eased * LIFT).toFixed(2)}px`);
     g.inner.style.setProperty('--sc', String(1 + eased * 0.12));
     g.inner.style.setProperty('--g', eased.toFixed(3));
   });
+}
+
+/**
+ * Every few seconds one line of the hero tears — the name splits into its
+ * red/cyan ghosts, the fmt.Println line jumps and slices. Random interval and
+ * random target so it never looks metronomic.
+ */
+export function initNameGlitch(): void {
+  if (reducedMotion()) return;
+
+  const targets: { el: HTMLElement; cls: string; dur: number }[] = $$<HTMLElement>(
+    '.hero h1 .ln',
+  ).map((el) => ({ el, cls: 'g', dur: 900 }));
+
+  const typer = $<HTMLElement>('.hero .typer');
+  if (typer) targets.push({ el: typer, cls: 'tear', dur: 1000 });
+
+  if (!targets.length) return;
+
+  const schedule = (): void => {
+    const wait = 3600 + Math.random() * 4600;
+    window.setTimeout(() => {
+      // only while the hero is actually on screen
+      if (window.scrollY < window.innerHeight) {
+        const t = targets[Math.floor(Math.random() * targets.length)]!;
+        t.el.classList.add(t.cls);
+        window.setTimeout(() => t.el.classList.remove(t.cls), t.dur);
+      }
+      schedule();
+    }, wait);
+  };
+
+  schedule();
 }
 
 /** The `fmt.Println("…")` typewriter. */

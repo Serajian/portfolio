@@ -2,7 +2,7 @@ import { initBackground, resizeBackground, updateBackground } from './background
 import { runBoot } from './boot';
 import { initCurtain } from './curtain';
 import { initCursor, updateCursor } from './cursor';
-import { initTyper, measureHero, revealHero, updateHero } from './hero';
+import { initNameGlitch, initTyper, measureHero, revealHero, updateHero } from './hero';
 import { initPointer, updatePointer } from './pointer';
 import { initCounters, initReveal } from './reveal';
 import { initScroll, measureHorizontal, updateScroll } from './scroll';
@@ -39,7 +39,10 @@ function main(): void {
   void document.fonts?.ready.then(measureHero);
 
   // the hero only animates once the boot curtain has lifted
-  void runBoot().then(revealHero);
+  void runBoot().then(() => {
+    revealHero();
+    initNameGlitch();
+  });
 
   if (reducedMotion()) {
     updateScroll();

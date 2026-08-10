@@ -10,6 +10,9 @@ export const pointer = {
   y: window.innerHeight / 2,
   sx: window.innerWidth / 2,
   sy: window.innerHeight / 2,
+  /** false until the pointer has actually moved — the assumed centre would
+   *  otherwise sit on the hero and hold letters up before anyone touched it */
+  live: false,
 };
 
 export function initPointer(): void {
@@ -18,7 +21,8 @@ export function initPointer(): void {
     (e) => {
       pointer.x = e.clientX;
       pointer.y = e.clientY;
-      if (!document.body.classList.contains('pointer-live')) {
+      if (!pointer.live) {
+        pointer.live = true;
         // jump the trailing ring to the first known position instead of
         // sliding it in from the middle of the screen
         pointer.sx = e.clientX;

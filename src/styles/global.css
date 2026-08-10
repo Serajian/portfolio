@@ -714,10 +714,11 @@ h1 .chi {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  background-image: linear-gradient(100deg, #dde5f7 0 36%, #ffffff 50%, #dde5f7 64% 100%);
-  animation: shine 7s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 65ms);
-  text-shadow: 0 0 calc(var(--g, 0) * 46px) hsl(var(--hue) 95% 70% / var(--g, 0));
+  background-image: linear-gradient(100deg, #b9c6e6 0 34%, #ffffff 50%, #b9c6e6 66% 100%);
+  animation: shine 5s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 60ms);
+  /* pointer glow lives in `filter` because the shine keyframes own text-shadow */
+  filter: drop-shadow(0 0 calc(var(--g, 0) * 26px) hsl(var(--hue) 95% 70% / var(--g, 0)));
 }
 h1 .accent .chi {
   background-image: linear-gradient(
@@ -727,15 +728,50 @@ h1 .accent .chi {
     var(--accent2) 66% 100%
   );
 }
+/* the band brightens as it crosses each letter, so light reads as light */
 @keyframes shine {
   0%,
-  70% {
+  62% {
     background-position: 100% 0;
+    text-shadow: none;
   }
-  93%,
+  80% {
+    text-shadow: 0 0 24px hsl(var(--hue) 95% 72% / 0.65);
+  }
+  95%,
   100% {
     background-position: 0 0;
+    text-shadow: none;
   }
+}
+
+/* periodic rgb tear — the ghosts read the line's own text */
+h1 .ln {
+  position: relative;
+}
+h1 .ln::before,
+h1 .ln::after {
+  content: attr(data-t);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+h1 .ln::before {
+  color: #ff2e63;
+}
+h1 .ln::after {
+  color: #12f7ff;
+}
+h1 .ln.g::before {
+  animation: gl1 0.45s steps(2, end) 2;
+}
+h1 .ln.g::after {
+  animation: gl2 0.45s steps(2, end) 2;
 }
 /* the shine paints through background-clip:text — without it the name would
    be transparent, so fall back to flat colour */
@@ -791,13 +827,13 @@ h1 .accent .chi {
   transform: translate3d(0, var(--lift, 0px), 0);
   background-size: 280% 100%;
   background-position: 100% 0;
-  background-image: linear-gradient(100deg, #6b7590 0 36%, #d7e0f5 50%, #6b7590 64% 100%);
+  background-image: linear-gradient(100deg, #5d6785 0 34%, #e2e9fa 50%, #5d6785 66% 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: shine 7s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 220ms);
-  text-shadow: 0 0 calc(var(--g, 0) * 22px) hsl(var(--hue) 92% 72% / calc(var(--g, 0) * 0.7));
+  animation: shine 5s ease-in-out infinite;
+  animation-delay: calc(0.9s + var(--i, 0) * 200ms);
+  filter: drop-shadow(0 0 calc(var(--g, 0) * 18px) hsl(var(--hue) 92% 72% / calc(var(--g, 0) * 0.8)));
 }
 
 .typer {
@@ -808,6 +844,45 @@ h1 .accent .chi {
 }
 .typer .fn {
   color: #7aa2f7;
+}
+/* same tear as the name, but the typed string changes constantly so there
+   are no attr() ghosts to offset — the line itself jumps and splits */
+.typer.tear {
+  animation: tear 0.5s steps(2, end) 2;
+}
+@keyframes tear {
+  0% {
+    transform: none;
+    text-shadow: none;
+    clip-path: none;
+  }
+  15% {
+    transform: translate(-6px, 1px);
+    text-shadow: -4px 0 #ff2e63, 4px 0 #12f7ff;
+    clip-path: inset(0 0 58% 0);
+  }
+  32% {
+    transform: translate(5px, -1px);
+    clip-path: inset(46% 0 20% 0);
+  }
+  50% {
+    transform: translate(-4px, 0);
+    clip-path: inset(18% 0 44% 0);
+  }
+  68% {
+    transform: translate(6px, 1px);
+    clip-path: inset(66% 0 4% 0);
+  }
+  84% {
+    transform: translate(-2px, 0);
+    text-shadow: -2px 0 #ff2e63, 2px 0 #12f7ff;
+    clip-path: none;
+  }
+  100% {
+    transform: none;
+    text-shadow: none;
+    clip-path: none;
+  }
 }
 .typer .kw {
   color: var(--purple);
