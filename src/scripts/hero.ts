@@ -16,6 +16,19 @@ interface Glyph {
 let glyphs: Glyph[] = [];
 
 /**
+ * Fires the screen-tear once. The class has to be removed and the layout
+ * flushed before re-adding it, or a second call while the first is still
+ * running does nothing.
+ */
+export function tearOnce(el: HTMLElement, ms = 1000): void {
+  if (reducedMotion()) return;
+  el.classList.remove('tear');
+  void el.offsetWidth;
+  el.classList.add('tear');
+  window.setTimeout(() => el.classList.remove('tear'), ms);
+}
+
+/**
  * Splits each hero line into characters that rise into place one by one,
  * and the Persian line into words. Each gets an inner span the pointer
  * reaction can transform without fighting the entrance animation.
@@ -63,6 +76,10 @@ export function revealHero(): void {
       fa.appendChild(wrap);
       if (i < words.length - 1) fa.appendChild(document.createTextNode(' '));
     });
+
+    // two tears just after it lands, then it settles and stays quiet
+    window.setTimeout(() => tearOnce(fa, 900), 2050);
+    window.setTimeout(() => tearOnce(fa, 900), 3350);
   }
 
   $$<HTMLElement>('.hero .prompt,.hero .typer,.hero .scroll-cue').forEach((el, i) => {
@@ -141,12 +158,12 @@ export function updateHero(): void {
 export function initNameGlitch(): void {
   if (reducedMotion()) return;
 
+  /* only the name lines. The fmt.Println line tears on its own schedule now
+     — every time it erases — and two sources fighting over the same class
+     would cut each other short. */
   const targets: { el: HTMLElement; cls: string; dur: number }[] = $$<HTMLElement>(
     '.hero h1 .ln',
   ).map((el) => ({ el, cls: 'g', dur: 900 }));
-
-  const typer = $<HTMLElement>('.hero .typer');
-  if (typer) targets.push({ el: typer, cls: 'tear', dur: 1000 });
 
   if (!targets.length) return;
 
@@ -179,6 +196,10 @@ export function initTyper(): void {
     return;
   }
 
+  /* the tear plays on the whole line, so it needs the container, not the
+     <b> the characters go into */
+  const line = el.closest<HTMLElement>('.typer');
+
   let w = 0;
   let i = 0;
   let deleting = false;
@@ -191,6 +212,9 @@ export function initTyper(): void {
     if (!deleting && i === word.length) {
       delay = 1500;
       deleting = true;
+      // erasing is the glitch: tear the line for as long as it takes to
+      // wipe the string, so the effect ends when the text does
+      if (line) window.setTimeout(() => tearOnce(line, word.length * 40 + 120), delay - 120);
     } else if (deleting && i === 0) {
       deleting = false;
       w = (w + 1) % words.length;

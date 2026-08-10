@@ -867,10 +867,13 @@ h1 .ln.g::after {
 .typer .fn {
   color: #7aa2f7;
 }
-/* same tear as the name, but the typed string changes constantly so there
-   are no attr() ghosts to offset — the line itself jumps and splits */
-.typer.tear {
-  animation: tear 0.5s steps(2, end) 2;
+/* Screen-tear: the element itself jumps and slices. Used where attr()
+   ghosts are not an option — the typed string changes constantly, and the
+   Persian name must not be split into characters. */
+/* loops while the class is present — callers decide how long it runs, so a
+   tear can cover a whole erase however long the string is */
+.tear {
+  animation: tear 0.5s steps(2, end) infinite;
 }
 @keyframes tear {
   0% {
