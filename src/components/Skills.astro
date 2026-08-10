@@ -1,15 +1,23 @@
 ---
 import { site } from '../data/site';
+import { CAREER_START, inWords, yearsOfExperience } from '../lib/experience';
 import SectionHead from './SectionHead.astro';
 
 const { skills, nav } = site;
 const hue = nav.find((n) => n.id === 'skills')?.hue ?? 42;
+
+/* rendered here so the sentence is complete without JS, then re-rendered in
+   the browser in case this build is older than the visitor's calendar */
+const [introBefore, introAfter] = skills.intro.split('{years}');
+const since = `${CAREER_START.year}-${CAREER_START.month}`;
 ---
 
 <section class="sec" id="skills" data-hue={hue}>
   <SectionHead overline={skills.overline} lead={skills.heading.lead} dim={skills.heading.dim} />
 
-  <p class="skills-intro rv">{skills.intro}</p>
+  <p class="skills-intro rv">
+    {introBefore}<span data-years={since}>{inWords(yearsOfExperience())}</span>{introAfter}
+  </p>
 
   <div class="skill-groups">
     {

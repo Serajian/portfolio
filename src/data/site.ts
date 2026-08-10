@@ -8,6 +8,8 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+import { CAREER_START } from '../lib/experience';
+
 export interface NavItem {
   /** must match the section's DOM id */
   id: string;
@@ -152,7 +154,7 @@ export const site = {
 
     meta: [
       { label: 'Location', value: 'Dubai, UAE' },
-      { label: 'Working since', value: '2018' },
+      { label: 'Working since', value: String(CAREER_START.year) },
       { label: 'Languages', value: 'Persian · English' },
       { label: 'Email', value: 'serajian.mohsen@gmail.com' },
     ] satisfies MetaItem[],
@@ -173,8 +175,10 @@ export const site = {
   skills: {
     overline: '// 03 — abilities',
     heading: { lead: 'My', dim: 'skills' },
+    /* {years} is filled from CAREER_START — at build time and again in the
+       browser, so the number is never stale. */
     intro:
-      'Seven years of shipping services other teams build on. No percentage bars — either I have used something in production or it is not on this list.',
+      '{years} years of shipping services other teams build on. No percentage bars — either I have used something in production or it is not on this list.',
     /* Grouped rather than ranked. Order inside a group is roughly how often
        I reach for it. */
     groups: [

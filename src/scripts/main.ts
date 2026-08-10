@@ -8,6 +8,7 @@ import { initReveal } from './reveal';
 import { initScroll, measureHorizontal, updateScroll } from './scroll';
 import { initSound } from './sound';
 import { reducedMotion } from './utils';
+import { initYears } from '../lib/experience';
 
 function frame(): void {
   updatePointer();
@@ -19,6 +20,7 @@ function frame(): void {
 }
 
 function main(): void {
+  initYears();
   initPointer();
   initSound();
   initCursor();
