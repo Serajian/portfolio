@@ -23,15 +23,17 @@ it when the section scrolls into view.
 Both live in `public/` and are referenced by filename, so updating them is a
 file swap — no code change:
 
-| what   | path                                  |
-| ------ | ------------------------------------- |
-| CV     | `public/Mohsen-Serajian-Resume.pdf`   |
-| photo  | `public/me.png`                       |
+| what  | path                                |
+| ----- | ----------------------------------- |
+| CV    | `public/Mohsen-Serajian-Resume.pdf` |
+| photo | `src/assets/me.png`                 |
 
 Keep the CV's filename the same — it is what the visitor's browser saves.
-For the photo use a roughly square image; it is displayed 1:1 and cropped to
-fill. If the file is missing the portrait frame removes itself rather than
-showing a broken image.
+
+The photo goes through Astro's image pipeline, so overwriting `src/assets/me.png`
+is enough: the next build re-encodes it to webp at three widths. A cut-out with
+a transparent background works best — the frame is landscape and the subject is
+bottom-aligned inside it, not cropped. The file must exist or the build fails.
 
 ## Commands
 

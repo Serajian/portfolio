@@ -112,9 +112,12 @@ export const site = {
     'Golang',
     '3M+ users served',
     'Event-driven systems',
+    'Blockchain',
     '800k+ concurrent connections',
+    'Smart contracts',
     'Domain-driven design',
     '100k+ uploads a day',
+    'Web3 backends',
     'Kafka · Kubernetes',
     'Postgres · Redis · Scylla',
   ],
@@ -125,23 +128,26 @@ export const site = {
     heading: { lead: 'About', dim: 'me' },
     /* Each string is a paragraph. Wrap a phrase in <span class="hl">…</span>
        to brighten it. */
+    /* Deliberately no employer names or dates — those live in the CV and go
+       stale the day they change. What stays is the scale and the class of
+       problem, which travel with me. */
     paragraphs: [
-      'I build backend systems that a lot of people are on the other end of. Since 2023 that has been at <span class="hl">Saba Idea</span>, working on <span class="hl">Aparat</span> — one of Iran\'s largest video platforms — where what I write is measured in millions of users rather than requests per second.',
-      'In practice that has meant a short-video pipeline taking <span class="hl">100k+ uploads a day</span>, a live-sports gamification platform for <span class="hl">3M+ users</span> that has to survive the spike the moment a match kicks off, a real-time cast service that turns a phone into a remote and a TV into a screen, and a chat backend holding <span class="hl">800k+ concurrent connections</span>.',
-      'Go is my primary language, usually next to Postgres, Redis, Kafka and Scylla. I care about domain boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing, and systems dull enough to sleep through. Before Aparat I spent a year on national-scale services for Iran\'s Ministry of Education, which is where I learned what "this cannot go down" actually costs.',
+      'I build backend systems that a lot of people are on the other end of. Most of my work has been on <span class="hl">high-traffic consumer platforms</span> — video, live sports, real-time messaging — where the interesting problems only show up once you have millions of users and a spike nobody scheduled.',
+      'In practice that has meant short-video pipelines taking <span class="hl">100k+ uploads a day</span>, gamification systems for <span class="hl">3M+ users</span> that have to hold the moment a match kicks off, real-time services that let a phone drive a TV across the room, and chat backends carrying <span class="hl">800k+ concurrent connections</span>. Before that, national-scale government platforms where "this cannot go down" was the entire requirement.',
+      'Go is my primary language, usually next to Postgres, Redis, Kafka and Scylla, and more recently <span class="hl">blockchain and smart-contract systems</span>. I care about domain boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing, and systems dull enough to sleep through.',
     ],
 
     /**
-     * Portrait next to the text.
-     * Drop the image at `public/me.png` (or change `src` to whatever you
-     * name it). A square-ish crop works best — it is displayed 1:1.
+     * Portrait next to the text. The image itself lives at
+     * `src/assets/me.png` — overwrite that file to change it and Astro
+     * re-optimises it (webp + responsive sizes) on the next build.
+     * Set to null to drop the frame entirely.
      */
     photo: {
-      src: '/me.png',
       alt: 'Mohsen Serajian',
-      /** the little label under the frame */
+      /** the little label in the corner of the frame */
       caption: 'Dubai, UAE',
-    } as { src: string; alt: string; caption: string } | null,
+    } as { alt: string; caption: string } | null,
 
     meta: [
       { label: 'Location', value: 'Dubai, UAE' },

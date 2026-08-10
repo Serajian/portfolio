@@ -1,5 +1,7 @@
 # ─────────── build ───────────
-FROM node:22-alpine AS build
+# debian rather than alpine: sharp (which optimises the portrait at build
+# time) ships glibc prebuilds and needs extra coaxing on musl
+FROM node:22-bookworm-slim AS build
 WORKDIR /app
 
 RUN corepack enable

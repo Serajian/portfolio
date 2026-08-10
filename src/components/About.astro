@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '../assets/me.png';
 import { site } from '../data/site';
 import CodeCard from './CodeCard.astro';
 import SectionHead from './SectionHead.astro';
@@ -40,14 +42,14 @@ const hue = nav.find((n) => n.id === 'about')?.hue ?? 212;
       {
         about.photo && (
           <figure class="portrait">
-            {/* until the file is dropped in, remove the frame rather than
-                leaving a broken image in the layout */}
-            <img
-              src={about.photo.src}
+            <Image
+              src={portrait}
               alt={about.photo.alt}
-              width="720"
-              height="720"
-              onerror="this.closest('.portrait')?.remove()"
+              widths={[420, 640, 900]}
+              sizes="(max-width: 1080px) 88vw, 520px"
+              format="webp"
+              quality={82}
+              loading="lazy"
             />
             <figcaption>{about.photo.caption}</figcaption>
           </figure>
