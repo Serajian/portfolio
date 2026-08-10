@@ -47,7 +47,11 @@ const since = `${CAREER_START.year}-${CAREER_START.month}`;
 
       <a class="pcard end" href={projects.outro.href} download>
         <h3 set:html={projects.outro.title} />
-        <p>{outroBefore}<span data-years={since}>{inWords(yearsOfExperience())}</span>{outroAfter}</p>
+        <p>
+          {outroBefore}<span data-years={since}>{inWords(yearsOfExperience())}</span><Fragment
+            set:html={outroAfter}
+          />
+        </p>
         <span class="foot">
           {projects.outro.cta} <em>↓</em>
         </span>

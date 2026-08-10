@@ -334,7 +334,7 @@ export const site = {
     /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
       title: '+ plenty<br>more',
-      body: '{years} years of services that never got a landing page: internal APIs, data migrations, third-party integrations, ops tooling and the occasional 3am rescue.',
+      body: '{years} years of services that never got a landing page — internal APIs, data migrations, integrations, ops tooling. Plus <span class="hl">blockchain and crypto work an NDA keeps me from describing</span>.',
       cta: 'The CV has the full list',
       href: '/Mohsen-Serajian-Resume.pdf',
     },

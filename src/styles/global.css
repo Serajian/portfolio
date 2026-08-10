@@ -1490,6 +1490,9 @@ h1 .ln.g::after {
 .pcard.end h3 {
   margin: 0 0 14px;
 }
+.pcard p .hl {
+  color: var(--text);
+}
 .hfoot {
   display: flex;
   align-items: center;
