@@ -23,25 +23,29 @@ class SoundEngine {
     vol: number,
     type: OscillatorType = 'sine',
     slideTo?: number,
+    /** seconds from now — scheduled on the audio clock, not setTimeout, so a
+     *  two-part sound lands the same way every time */
+    delay = 0,
   ): void {
     if (!this.enabled) return;
     const c = this.context;
     if (!c) return;
 
+    const t0 = c.currentTime + delay;
     const osc = c.createOscillator();
     const gain = c.createGain();
     osc.type = type;
-    osc.frequency.setValueAtTime(freq, c.currentTime);
-    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, c.currentTime + dur);
+    osc.frequency.setValueAtTime(freq, t0);
+    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
 
-    gain.gain.setValueAtTime(0.0001, c.currentTime);
-    gain.gain.exponentialRampToValueAtTime(vol, c.currentTime + 0.006);
-    gain.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + dur);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(vol, t0 + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
     osc.connect(gain);
     gain.connect(c.destination);
-    osc.start();
-    osc.stop(c.currentTime + dur + 0.03);
+    osc.start(t0);
+    osc.stop(t0 + dur + 0.03);
   }
 
   /** throttled so sweeping across a card grid doesn't machine-gun */
@@ -49,22 +53,23 @@ class SoundEngine {
     const now = performance.now();
     if (now - this.lastHover < 70) return;
     this.lastHover = now;
-    this.tone(1750, 0.028, 0.012, 'sine');
+    this.tone(760, 0.03, 0.01, 'sine');
   }
 
+  /** a dry two-part click: the body, then a low thump under it */
   click(): void {
-    this.tone(680, 0.05, 0.05, 'triangle', 300);
-    window.setTimeout(() => this.tone(240, 0.06, 0.03, 'sine'), 36);
+    this.tone(420, 0.045, 0.05, 'triangle', 170);
+    this.tone(110, 0.09, 0.035, 'sine', undefined, 0.01);
   }
 
-  /** the curtain sweep */
+  /** the curtain sweep — falling rather than rising, like a heavy door */
   swipe(): void {
-    this.tone(180, 0.5, 0.045, 'sawtooth', 900);
+    this.tone(320, 0.26, 0.045, 'sine', 90);
   }
 
   /** a heading finishing its scramble */
   tick(): void {
-    this.tone(1200, 0.02, 0.02, 'square');
+    this.tone(900, 0.018, 0.018, 'sine');
   }
 
   toggle(): boolean {
