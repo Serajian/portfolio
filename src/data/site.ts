@@ -237,39 +237,42 @@ export const site = {
   },
 
   /* ─────────── services ─────────── */
+  /* Worded to read the same to a hiring manager and to a client: what I do,
+     not what I will sell you. Six cards because the grid is three wide and
+     six strong ones beat nine diluted. */
   services: {
-    overline: '// 04 — what i do',
-    heading: { lead: 'Services', dim: '' },
+    overline: '// 04 — capabilities',
+    heading: { lead: 'What I', dim: 'do' },
     items: [
       {
         icon: '{ }',
-        title: 'API Development',
-        body: 'Secure, well-documented HTTP and gRPC APIs that teams actually enjoy using.',
+        title: 'Backend & API Development',
+        body: 'Go services behind REST and WebSocket APIs — built so other teams can integrate without booking a meeting, and so the next person to open the code can follow it.',
       },
       {
         icon: '◫',
         title: 'System Architecture',
-        body: 'Scalable service topologies that survive traffic spikes without waking anyone up.',
+        body: 'Domain boundaries, clean and hexagonal layering, and the call on what deserves its own service and which store it belongs in — Postgres, Redis, Scylla or Cassandra.',
+      },
+      {
+        icon: '⇄',
+        title: 'Event-Driven & Real-Time',
+        body: 'Kafka-backed event flows and WebSocket transports for chat, live updates and device-to-device sync, with backpressure planned rather than discovered.',
       },
       {
         icon: '⌁',
-        title: 'Performance Tuning',
-        body: 'Profiling, query optimization and caching strategies — measured, not guessed.',
+        title: 'High-Traffic & Performance',
+        body: 'Systems that hold when a live event starts: hot paths profiled with pprof, traces and dashboards in place before launch, capacity decided ahead of the spike instead of during it.',
       },
       {
-        icon: '⊞',
-        title: 'Data Pipelines',
-        body: 'Event streaming and batch pipelines with at-least-once delivery and clean backpressure.',
-      },
-      {
-        icon: '↻',
-        title: 'DevOps & CI/CD',
-        body: 'Reproducible builds, containerized deploys, pipelines that fail loudly and early.',
+        icon: '⬡',
+        title: 'Blockchain & Smart Contracts',
+        body: 'Solidity contracts, event indexers, node operations and wallet and key handling across EVM chains, TON, Solana and Cosmos.',
       },
       {
         icon: '◈',
-        title: 'Technical Consulting',
-        body: 'Architecture reviews and second opinions before the expensive decision gets made.',
+        title: 'Technical Leadership',
+        body: 'Architecture reviews, mentoring and code review — a second opinion before the expensive decision, and a team that can maintain what it ships.',
       },
     ] satisfies Service[],
   },
