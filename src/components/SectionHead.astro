@@ -1,0 +1,18 @@
+---
+interface Props {
+  overline: string;
+  lead: string;
+  dim?: string;
+}
+
+const { overline, lead, dim = '' } = Astro.props;
+/* the glitch ghosts render this plain string behind the heading */
+const plain = dim ? `${lead} ${dim}` : lead;
+---
+
+<div class="sec-head px">
+  <div class="overline">{overline}</div>
+  {/* kept on one line: stray whitespace would become text nodes the scramble
+      then has to animate, which shifts the heading around while it settles */}
+  <h2><span class="glitch" data-text={plain} data-scramble>{lead}{dim ? ' ' : ''}{dim ? <span class="dim">{dim}</span> : null}</span></h2>
+</div>

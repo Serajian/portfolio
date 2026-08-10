@@ -1,0 +1,45 @@
+---
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+
+const { projects, nav } = site;
+const hue = nav.find((n) => n.id === 'projects')?.hue ?? 28;
+---
+
+{/* tall section + sticky inner pin: vertical scrolling drives the row sideways */}
+<section class="hsec" id="projects" data-hue={hue}>
+  <div class="hpin">
+    <SectionHead
+      overline={projects.overline}
+      lead={projects.heading.lead}
+      dim={projects.heading.dim}
+    />
+
+    <div class="hhint">{projects.hint}</div>
+
+    <div class="htrack" id="htrack">
+      {
+        projects.items.map((p) => (
+          <a class="pcard" href={p.href}>
+            <span class="num">{p.code}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            <span class="foot">
+              {p.stack} <em>→</em>
+            </span>
+          </a>
+        ))
+      }
+
+      <a class="pcard end" href={projects.outro.href}>
+        <h3 set:html={projects.outro.title} />
+        <p>{projects.outro.body}</p>
+        <span class="foot">
+          {projects.outro.cta} <em>→</em>
+        </span>
+      </a>
+    </div>
+
+    <div class="hbar"><i id="hbarfill"></i></div>
+  </div>
+</section>

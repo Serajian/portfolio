@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+
+const { contact, nav } = site;
+const hue = nav.find((n) => n.id === 'contact')?.hue ?? 322;
+
+/* Static hosting can't process a POST, so without an endpoint the form
+   stays a non-submitting mockup. */
+const formAttrs = contact.form.endpoint
+  ? { action: contact.form.endpoint, method: 'POST' }
+  : { onsubmit: 'return false' };
+---
+
+<section class="sec" id="contact" data-hue={hue}>
+  <SectionHead overline={contact.overline} lead={contact.heading.lead} dim={contact.heading.dim} />
+
+  <div class="contact-grid">
+    <div class="cinfo rv">
+      {
+        contact.links.map((link) => (
+          <a href={link.href}>
+            <k>{link.label}</k> {link.value}
+          </a>
+        ))
+      }
+    </div>
+
+    <form class="code rv" {...formAttrs}>
+      <div class="code-bar">
+        <i></i><i></i><i></i><span>{contact.form.filename}</span>
+      </div>
+      <pre>
+<div class="field"><label for="cf-name">name:</label><input id="cf-name" name="name" placeholder="your name" required /></div>
+<div class="field"><label for="cf-mail">mail:</label><input id="cf-mail" name="email" type="email" placeholder="you@company.com" required /></div>
+<div class="field"><label for="cf-body">body:</label><textarea id="cf-body" name="message" rows="4" placeholder="what are you building?" required></textarea></div>
+<div class="send"><button class="btn mag" type="submit"><span>{contact.form.submitLabel}</span></button></div></pre>
+    </form>
+  </div>
+</section>

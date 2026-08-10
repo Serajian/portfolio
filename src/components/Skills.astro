@@ -1,0 +1,38 @@
+---
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+
+const { skills, nav } = site;
+const hue = nav.find((n) => n.id === 'skills')?.hue ?? 268;
+---
+
+<section class="sec" id="skills" data-hue={hue}>
+  <SectionHead overline={skills.overline} lead={skills.heading.lead} dim={skills.heading.dim} />
+
+  <div class="skills-grid">
+    <div class="bars rv">
+      {
+        skills.bars.map((bar) => (
+          <div>
+            <div class="bar-h">
+              <b>{bar.label}</b>
+              <em data-c={bar.value} data-suffix="%">
+                0%
+              </em>
+            </div>
+            <div class="track">
+              <div class="fill" data-w={bar.value} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="rv" style="transition-delay:.12s">
+      <p style="color:var(--muted);margin-bottom:22px;max-width:50ch">{skills.intro}</p>
+      <div class="chips">
+        {skills.chips.map((chip) => <span class="chip">{chip}</span>)}
+      </div>
+    </div>
+  </div>
+</section>

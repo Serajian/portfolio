@@ -1,0 +1,55 @@
+---
+import { site } from '../data/site';
+import CodeCard from './CodeCard.astro';
+import SectionHead from './SectionHead.astro';
+
+const { about, nav } = site;
+const hue = nav.find((n) => n.id === 'about')?.hue ?? 212;
+---
+
+<section class="sec" id="about" data-hue={hue}>
+  <SectionHead overline={about.overline} lead={about.heading.lead} dim={about.heading.dim} />
+
+  <div class="about-grid">
+    <div class="about rv">
+      {about.paragraphs.map((p) => <p set:html={p} />)}
+
+      <div class="meta">
+        {
+          about.meta.map((m) => (
+            <div>
+              <k>{m.label}</k>
+              {m.value}
+            </div>
+          ))
+        }
+      </div>
+
+      {
+        about.cv && (
+          <div style="margin-top:32px">
+            <a class="btn mag" href={about.cv.href}>
+              <span>{about.cv.label}</span>
+            </a>
+          </div>
+        )
+      }
+    </div>
+
+    <CodeCard filename={about.codeCard.filename} lines={about.codeCard.lines} class="rv" />
+  </div>
+
+  <div class="stats">
+    {
+      about.stats.map((stat, i) => (
+        <div class="stat rv" style={`transition-delay:${i * 0.08}s`}>
+          <b>
+            <span data-c={stat.value}>0</span>
+            {stat.suffix && <i>{stat.suffix}</i>}
+          </b>
+          <k>{stat.label}</k>
+        </div>
+      ))
+    }
+  </div>
+</section>

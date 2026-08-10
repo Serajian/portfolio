@@ -1,0 +1,37 @@
+---
+import { site } from '../data/site';
+
+const { hero, nav } = site;
+const hue = nav.find((n) => n.id === 'home')?.hue ?? 186;
+---
+
+<section class="sec hero" id="home" data-hue={hue}>
+  <div class="hero-inner">
+    <div class="prompt">
+      <span class="sym">$</span> whoami <span class="sym">&rarr;</span> {hero.prompt}
+    </div>
+
+    <h1>
+      {
+        hero.lines.map((line, i) => (
+          <span class={i === hero.lines.length - 1 ? 'ln accent' : 'ln'} data-t={line} />
+        ))
+      }
+    </h1>
+
+    <div class="typer">
+      <span class="kw">const</span> role = <span class="str">"<b
+        id="tw"
+        data-roles={JSON.stringify(hero.roles)}></b></span><span class="cur"></span>
+    </div>
+
+    <div class="cta">
+      <a class="btn mag" href={hero.primaryCta.href}><span>{hero.primaryCta.label}</span></a>
+      <a class="btn solid mag" href={hero.secondaryCta.href}>
+        <span>{hero.secondaryCta.label}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span class="bar"></span> SCROLL</div>
+</section>

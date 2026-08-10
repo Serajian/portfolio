@@ -1,0 +1,27 @@
+---
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+
+const { services, nav } = site;
+const hue = nav.find((n) => n.id === 'services')?.hue ?? 152;
+---
+
+<section class="sec" id="services" data-hue={hue}>
+  <SectionHead
+    overline={services.overline}
+    lead={services.heading.lead}
+    dim={services.heading.dim}
+  />
+
+  <div class="cards">
+    {
+      services.items.map((item, i) => (
+        <div class="card rv" style={`transition-delay:${i * 0.07}s`}>
+          <div class="ic">{item.icon}</div>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

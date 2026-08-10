@@ -1,0 +1,17 @@
+---
+import { site } from '../data/site';
+---
+
+<footer>
+  <span>{site.footer.left}</span>
+  <span>
+    {
+      site.footer.links.map((link, i) => (
+        <>
+          {i > 0 && ' · '}
+          <a href={link.href}>{link.label}</a>
+        </>
+      ))
+    }
+  </span>
+</footer>

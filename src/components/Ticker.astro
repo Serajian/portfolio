@@ -1,0 +1,19 @@
+---
+import { site } from '../data/site';
+
+/* the row is duplicated so the -50% keyframe loops seamlessly */
+const items = [...site.ticker, ...site.ticker];
+---
+
+<div class="ticker">
+  <div class="run">
+    {
+      items.map((item) => (
+        <>
+          <span>{item}</span>
+          <span><b>·</b></span>
+        </>
+      ))
+    }
+  </div>
+</div>

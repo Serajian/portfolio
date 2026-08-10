@@ -1,0 +1,33 @@
+---
+import { site } from '../data/site';
+---
+
+{/* boot terminal — removed from the DOM once it lifts */}
+<div id="boot">
+  <div>
+    {site.boot.lines.map((line) => <div class="l">{line}</div>)}
+  </div>
+  <div class="pct">00%</div>
+  <div class="track"><i></i></div>
+</div>
+
+{/* live background: shader + glyph rain, with a CSS-only fallback */}
+<div class="bg">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <canvas id="gl"></canvas>
+  <canvas id="rain"></canvas>
+</div>
+
+<div class="scan"></div>
+<div class="vig"></div>
+
+{/* custom cursor */}
+<div class="cur-ring"></div>
+<div class="cur-dot"></div>
+
+{/* nav transition curtain */}
+<div class="curtain" id="curtain">
+  <i></i><i></i><i></i><i></i><i></i><i></i>
+  <span class="clabel" id="clabel"></span>
+</div>
