@@ -77,9 +77,12 @@ export function revealHero(): void {
       if (i < words.length - 1) fa.appendChild(document.createTextNode(' '));
     });
 
-    // two tears just after it lands, then it settles and stays quiet
-    window.setTimeout(() => tearOnce(fa, 900), 2050);
-    window.setTimeout(() => tearOnce(fa, 900), 3350);
+    /* Timeline, from when the hero starts: the words fly in at 0.95s and
+       have landed by 2.0s, it tears at 2.2s, and it leaves at 4.0s — two
+       full seconds settled and readable. The line it sat on stays
+       reserved, so nothing below it moves when it goes. */
+    window.setTimeout(() => tearOnce(fa, 600), 2200);
+    window.setTimeout(() => fa.classList.add('gone'), 4000);
   }
 
   $$<HTMLElement>('.hero .prompt,.hero .typer,.hero .scroll-cue').forEach((el, i) => {

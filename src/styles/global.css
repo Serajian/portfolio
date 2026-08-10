@@ -822,6 +822,16 @@ h1 .ln.g::after {
   line-height: 1.9;
   color: var(--muted);
   margin: -10px 0 28px;
+  transition: opacity 0.55s ease, filter 0.55s ease, transform 0.55s ease,
+    visibility 0s linear 0.55s;
+}
+/* it says its piece and leaves. visibility rather than display, so the line
+   it occupied stays reserved and fmt.Println below does not jump up. */
+.hero .fa.gone {
+  opacity: 0;
+  filter: blur(7px);
+  transform: translateX(16px);
+  visibility: hidden;
 }
 /* split by word, never by letter — Persian is a connected script and
    per-letter spans break the joining forms */

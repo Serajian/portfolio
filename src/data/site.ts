@@ -99,9 +99,12 @@ export const site = {
     /** the name, split into lines — the second line gets the gradient */
     lines: ['Mohsen', 'Serajian'],
     /**
-     * Persian name under the latin one. Rendered small and dim, revealed
-     * right-to-left. Never split into characters — Persian is a connected
-     * script and per-letter spans would break the joining forms.
+     * Persian name under the latin one. Flies in from the right, tears once,
+     * and is gone about two seconds later — the line it sat on stays
+     * reserved so nothing below it moves.
+     *
+     * Split by word, never by character: Persian is a connected script and
+     * per-letter spans would break the joining forms.
      */
     nameFa: 'محسن سراجیان',
     /** cycled by the typewriter inside fmt.Println() */
