@@ -1490,10 +1490,24 @@ h1 .ln.g::after {
 .pcard.end h3 {
   margin: 0 0 14px;
 }
+.hfoot {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: calc(100% - var(--pad) * 2);
+}
+.hlabel {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
 .hbar {
   height: 2px;
   background: var(--line);
-  width: calc(100% - var(--pad) * 2);
+  flex: 1;
   position: relative;
   overflow: hidden;
 }
@@ -1504,13 +1518,28 @@ h1 .ln.g::after {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   box-shadow: 0 0 12px var(--glow);
 }
-.hhint {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.hnote {
   color: var(--muted);
-  margin-top: -24px;
+  max-width: 62ch;
+  margin-top: -22px;
+  font-size: 0.95rem;
+}
+/* work without a public URL: same card, no hover promise of a destination */
+.pcard.unlinked {
+  cursor: default;
+}
+.pcard.unlinked:hover {
+  transform: none;
+}
+.pcard .foot em.private {
+  color: var(--muted);
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 9.5px;
+}
+.pcard:hover .foot em.private {
+  transform: none;
 }
 
 /* ═══════════════════════════════════════════════════════════

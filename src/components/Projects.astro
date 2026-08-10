@@ -1,9 +1,15 @@
 ---
 import { site } from '../data/site';
+import { CAREER_START, inWords, yearsOfExperience } from '../lib/experience';
 import SectionHead from './SectionHead.astro';
 
 const { projects, nav } = site;
-const hue = nav.find((n) => n.id === 'projects')?.hue ?? 28;
+const hue = nav.find((n) => n.id === 'projects')?.hue ?? 20;
+
+/* same {years} token as the skills intro — rendered here, corrected in the
+   browser if the build outlives the anniversary */
+const [outroBefore, outroAfter] = projects.outro.body.split('{years}');
+const since = `${CAREER_START.year}-${CAREER_START.month}`;
 ---
 
 {/* tall section + sticky inner pin: vertical scrolling drives the row sideways */}
@@ -15,31 +21,42 @@ const hue = nav.find((n) => n.id === 'projects')?.hue ?? 28;
       dim={projects.heading.dim}
     />
 
-    <div class="hhint">{projects.hint}</div>
+    <p class="hnote">{projects.note}</p>
 
     <div class="htrack" id="htrack">
       {
-        projects.items.map((p) => (
-          <a class="pcard" href={p.href}>
-            <span class="num">{p.code}</span>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-            <span class="foot">
-              {p.stack} <em>→</em>
-            </span>
-          </a>
-        ))
+        projects.items.map((p) => {
+          /* work with no public URL renders as a plain card, not a dead link */
+          const Tag = p.href ? 'a' : 'div';
+          const linkAttrs = p.href
+            ? { href: p.href, target: '_blank', rel: 'noopener noreferrer' }
+            : {};
+          return (
+            <Tag class:list={['pcard', !p.href && 'unlinked']} {...linkAttrs}>
+              <span class="num">{p.code}</span>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+              <span class="foot">
+                {p.stack}
+                {p.href ? <em>↗</em> : <em class="private">internal</em>}
+              </span>
+            </Tag>
+          );
+        })
       }
 
-      <a class="pcard end" href={projects.outro.href}>
+      <a class="pcard end" href={projects.outro.href} download>
         <h3 set:html={projects.outro.title} />
-        <p>{projects.outro.body}</p>
+        <p>{outroBefore}<span data-years={since}>{inWords(yearsOfExperience())}</span>{outroAfter}</p>
         <span class="foot">
-          {projects.outro.cta} <em>→</em>
+          {projects.outro.cta} <em>↓</em>
         </span>
       </a>
     </div>
 
-    <div class="hbar"><i id="hbarfill"></i></div>
+    <div class="hfoot">
+      <span class="hlabel">{projects.scrollHint}</span>
+      <div class="hbar"><i id="hbarfill"></i></div>
+    </div>
   </div>
 </section>

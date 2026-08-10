@@ -36,12 +36,13 @@ export interface Service {
 }
 
 export interface Project {
-  /** shown above the title, e.g. "001 / LEDGER" */
+  /** shown above the title, e.g. "001 / SHORTS" */
   code: string;
   title: string;
   body: string;
   stack: string;
-  href: string;
+  /** null when the work has no public URL — the card renders unlinked */
+  href: string | null;
 }
 
 export interface ContactLink {
@@ -280,51 +281,62 @@ export const site = {
   /* ─────────── projects (horizontal scroller) ─────────── */
   projects: {
     overline: '// 05 — selected work',
-    heading: { lead: 'Projects', dim: '' },
-    hint: '↔ scroll to move sideways',
+    heading: { lead: 'Selected', dim: 'work' },
+    /* A backend portfolio has nothing to screenshot, so each card states the
+       constraint, what was built and the stack. The product is context; the
+       system is the work. */
+    note: 'A selection — these are the ones with a public URL. Most of what I build never gets one.',
+    scrollHint: '↔ scroll',
     items: [
       {
-        code: '001 / LEDGER',
-        title: 'Ledger API',
-        body: 'Double-entry accounting service handling 4k req/s with strict consistency guarantees and an audit trail you can actually replay.',
-        stack: 'Go · Postgres',
-        href: '#',
+        code: '001 / SHORTS',
+        title: 'Aparat Shorts',
+        body: 'The backend behind a Reels-style short-video feed — upload, processing and delivery. Carries 100k+ uploads a day and had to stay predictable while the product shipped weekly.',
+        stack: 'Go · Microservices',
+        href: 'https://www.aparat.com/shorts',
       },
       {
-        code: '002 / RELAY',
-        title: 'Stream Relay',
-        body: 'Fan-out message broker with at-least-once delivery, backpressure-aware consumers and zero-downtime rebalancing.',
-        stack: 'Go · NATS',
-        href: '#',
+        code: '002 / GAME CLUB',
+        title: 'Game Club — Aparat Sport',
+        body: 'A gamification platform on top of live sports: scoring, predictions, quizzes, missions, leagues and rankings for 3M+ users. Event-driven on Kafka and built for the spike that lands the second a match kicks off.',
+        stack: 'Go · Kafka',
+        href: 'https://www.aparatsport.ir/',
       },
       {
-        code: '003 / RAFT',
-        title: 'Raft KV Store',
-        body: 'A small distributed key-value store built to understand consensus from first principles — leader election, log compaction, the lot.',
-        stack: 'Go · Raft',
-        href: '#',
+        code: '003 / CAST',
+        title: 'Apollo Cast',
+        body: 'A real-time service that turns a phone into a remote and a TV into a screen. WebSocket transport with device pairing and state sync, where anything past a few hundred milliseconds is felt rather than measured.',
+        stack: 'Go · WebSocket',
+        href: null,
       },
       {
-        code: '004 / QUEUE',
-        title: 'Job Queue',
-        body: 'Durable background runner with retries, dead-letter handling, cron-style scheduling and a tiny web dashboard.',
-        stack: 'Go · Redis',
-        href: '#',
+        code: '004 / CHAT',
+        title: 'Chat Service',
+        body: 'Messaging across channels: chat APIs and workflows on WebSocket and event-driven patterns, holding 800k+ concurrent connections without the tail latency creeping up.',
+        stack: 'Go · WebSocket',
+        href: null,
       },
       {
-        code: '005 / OBSERV',
-        title: 'Trace Collector',
-        body: 'OpenTelemetry ingest pipeline sampling 12M spans a day into columnar storage without dropping the interesting ones.',
-        stack: 'Go · ClickHouse',
-        href: '#',
+        code: '005 / WISHLY',
+        title: 'Wishly',
+        body: 'My own product. Wishlists and birthday reminders — friends see what you actually want, without spoilers or duplicates, and get nudged by email or SMS a few days ahead. Three languages, Persian included.',
+        stack: 'Go',
+        href: 'https://wishly.info',
+      },
+      {
+        code: '006 / GOV',
+        title: 'National education platforms',
+        body: "National-scale services for Iran's largest government organisation: financial aid, loans, registration and core administrative systems. The requirement that shaped every decision was that they cannot go down.",
+        stack: 'Go · Microservices',
+        href: null,
       },
     ] satisfies Project[],
-    /** the dashed card at the end of the row */
+    /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
-      title: 'Your project<br>next?',
-      body: 'Always up for a hard backend problem.',
-      cta: "Let's talk",
-      href: '#contact',
+      title: '+ plenty<br>more',
+      body: '{years} years of services that never got a landing page: internal APIs, data migrations, third-party integrations, ops tooling and the occasional 3am rescue.',
+      cta: 'The CV has the full list',
+      href: '/Mohsen-Serajian-Resume.pdf',
     },
   },
 
