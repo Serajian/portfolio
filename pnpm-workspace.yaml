@@ -1,0 +1,5 @@
+# pnpm 11 reads settings from here rather than package.json.
+# These packages need their install scripts to fetch native binaries.
+allowBuilds:
+  esbuild: true
+  sharp: true
