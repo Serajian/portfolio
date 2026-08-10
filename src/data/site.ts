@@ -372,16 +372,10 @@ export const site = {
       },
       { label: 'Location', value: 'Dubai, UAE', href: '#', icon: 'location' },
     ] satisfies ContactLink[],
-    form: {
-      filename: 'message.sh',
-      /**
-       * Where the form posts. Static hosting can't process forms, so this
-       * needs an external endpoint (Formspree / Basin / your own handler).
-       * Leave null and the form stays a non-submitting mockup.
-       */
-      endpoint: null as string | null,
-      submitLabel: 'Send message ↵',
-    },
+    /* No form: a static site can't send mail on its own, and a contact form
+       that needs a third party to work is worse than an address that always
+       does. */
+    lead: 'Email or Telegram is the fastest way to reach me.',
   },
 
   /* ─────────── sidebar socials + footer ─────────── */
