@@ -1118,80 +1118,81 @@ h1 .ln.g::after {
   flex-direction: column;
   gap: 22px;
 }
+/* The photo is a cut-out, so it is not boxed in. A plate sits behind it and
+   the subject rises out of the top edge — treating it as a cut-out instead
+   of cropping it into a rectangle. */
 .portrait {
   position: relative;
-  isolation: isolate;
-  aspect-ratio: 5 / 4;
+}
+/* the plate starts below the top of the image — that gap is the break-out */
+.portrait::before {
+  content: '';
+  position: absolute;
+  inset: 44px 0 0;
+  border-radius: 16px;
   border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px -50px #000;
-  /* the photo is a cut-out, so the frame supplies its own backdrop:
-     a pool of accent light for the subject to stand in */
-  background: radial-gradient(75% 60% at 50% 92%, hsl(var(--hue) 85% 45% / 0.22), transparent 70%),
-    linear-gradient(180deg, rgb(10 13 20 / 0.75), rgb(16 20 30 / 0.9));
+  /* light enough that a black t-shirt still reads against it, with a halo
+     behind the head so the silhouette separates from the plate */
+  background: radial-gradient(58% 52% at 50% 24%, hsl(var(--hue) 85% 58% / 0.32), transparent 72%),
+    repeating-linear-gradient(180deg, rgb(0 0 0 / 0.13) 0 2px, transparent 2px 4px),
+    linear-gradient(180deg, rgb(33 42 62 / 0.92), rgb(15 20 31 / 0.96));
+  box-shadow: 0 34px 90px -55px #000, inset 0 1px 0 rgb(255 255 255 / 0.06);
+  transition: border-color 0.4s;
+}
+/* a horizon line for the subject to stand on */
+.portrait::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 54px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--hue) 90% 62% / 0.5), transparent);
+  box-shadow: 0 0 20px var(--glow);
 }
 .portrait img {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
-  height: 100%;
-  /* contain + bottom aligned: a cut-out should stand in the frame, not be
-     cropped through the shoulders */
-  object-fit: contain;
-  object-position: 50% 100%;
-  filter: grayscale(1) contrast(1.08) brightness(0.95);
-  transform: translateY(0);
+  height: auto;
+  filter: grayscale(1) contrast(1.1) brightness(0.98)
+    drop-shadow(0 24px 34px rgb(0 0 0 / 0.55));
   animation: portraitFloat 8s ease-in-out infinite;
   transition: filter 0.5s;
 }
 @keyframes portraitFloat {
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px) scale(1.012);
+    transform: translateY(-9px);
   }
-}
-/* duotone: the grayscale photo picks up whatever hue the section is on */
-.portrait::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  mix-blend-mode: color;
-  background: linear-gradient(160deg, hsl(var(--hue) 90% 55% / 0.45), transparent 60%),
-    linear-gradient(0deg, hsl(calc(var(--hue) + 60) 80% 42% / 0.35), transparent 55%);
-  transition: opacity 0.5s;
-}
-/* scanlines and a fade the caption sits on */
-.portrait::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: repeating-linear-gradient(180deg, rgb(0 0 0 / 0.14) 0 2px, transparent 2px 4px),
-    linear-gradient(0deg, rgb(5 7 12 / 0.7), transparent 38%);
 }
 .portrait figcaption {
   position: absolute;
   left: 18px;
-  bottom: 15px;
-  z-index: 4;
+  bottom: 16px;
+  z-index: 3;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
+  background: hsl(var(--hue) 80% 50% / 0.12);
+  border: 1px solid hsl(var(--hue) 80% 60% / 0.3);
+  border-radius: 20px;
+  padding: 5px 12px;
+  backdrop-filter: blur(6px);
 }
 .portrait:hover img {
-  filter: grayscale(0.25) contrast(1.1) brightness(1.04);
+  filter: grayscale(0.2) contrast(1.12) brightness(1.05)
+    drop-shadow(0 24px 40px hsl(var(--hue) 90% 30% / 0.6));
   animation-play-state: paused;
 }
 .portrait:hover::before {
-  opacity: 0.4;
+  border-color: hsl(var(--hue) 80% 60% / 0.4);
 }
 
 /* ═══════════════════════════════════════════════════════════

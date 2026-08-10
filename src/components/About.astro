@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import portrait from '../assets/me.png';
 import { site } from '../data/site';
-import CodeCard from './CodeCard.astro';
 import SectionHead from './SectionHead.astro';
 
 const { about, nav } = site;
@@ -55,8 +54,6 @@ const hue = nav.find((n) => n.id === 'about')?.hue ?? 212;
           </figure>
         )
       }
-
-      <CodeCard filename={about.codeCard.filename} lines={about.codeCard.lines} />
     </div>
   </div>
 </section>
