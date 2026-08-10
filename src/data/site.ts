@@ -118,7 +118,7 @@ export const site = {
     'Smart contracts',
     'Domain-driven design',
     '100k+ uploads a day',
-    'Web3 backends',
+    'Solidity · EVM',
     'Kafka · Kubernetes',
     'Postgres · Redis · Scylla',
   ],
@@ -180,7 +180,7 @@ export const site = {
     groups: [
       {
         label: 'Languages',
-        items: ['Go', 'JavaScript', 'SQL'],
+        items: ['Go', 'TypeScript', 'JavaScript', 'SQL'],
       },
       {
         label: 'Architecture',
@@ -191,6 +191,8 @@ export const site = {
           'Event-Driven Systems',
           'RESTful APIs',
           'WebSocket',
+          'Real-time & low-latency',
+          'High-traffic & spike handling',
         ],
       },
       {
@@ -199,12 +201,33 @@ export const site = {
       },
       {
         label: 'Platform',
-        items: ['Kafka', 'Docker', 'Kubernetes', 'Linux', 'Git'],
+        items: ['Kafka', 'Docker', 'Kubernetes', 'Linux', 'Git', 'GitLab CI', 'GitHub Actions'],
       },
       {
-        // TODO: swap these for the chains and tooling you actually use
+        label: 'Observability',
+        items: ['OpenTelemetry', 'Jaeger', 'Grafana'],
+      },
+      {
+        label: 'Testing',
+        items: ['Unit & integration tests', 'testify', 'Mocking', 'Benchmarks', 'pprof profiling'],
+      },
+      {
         label: 'Blockchain',
-        items: ['Smart contracts', 'Web3 backends'],
+        items: [
+          'Solidity',
+          'go-ethereum',
+          'Ethereum / EVM',
+          'Event indexers',
+          'Node operations',
+          'Wallet & key management',
+          'TON',
+          'Solana',
+          'Cosmos',
+        ],
+      },
+      {
+        label: 'Leadership',
+        items: ['Technical leadership', 'Mentoring', 'Code review'],
       },
     ] satisfies SkillGroup[],
   },
