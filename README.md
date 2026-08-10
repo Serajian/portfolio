@@ -18,6 +18,21 @@ Each nav entry has a `hue` (0–360). That hue drives the accent colour, the
 gradients, the glow **and** the WebGL background — the whole theme animates to
 it when the section scrolls into view.
 
+## Replacing the CV and the photo
+
+Both live in `public/` and are referenced by filename, so updating them is a
+file swap — no code change:
+
+| what   | path                                  |
+| ------ | ------------------------------------- |
+| CV     | `public/Mohsen-Serajian-Resume.pdf`   |
+| photo  | `public/me.png`                       |
+
+Keep the CV's filename the same — it is what the visitor's browser saves.
+For the photo use a roughly square image; it is displayed 1:1 and cropped to
+fill. If the file is missing the portrait frame removes itself rather than
+showing a broken image.
+
 ## Commands
 
 ```bash

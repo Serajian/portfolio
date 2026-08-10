@@ -27,14 +27,6 @@ export interface Skill {
   value: number;
 }
 
-export interface Stat {
-  /** the number that counts up */
-  value: number;
-  /** rendered after the number, e.g. ".9" or "+" */
-  suffix?: string;
-  label: string;
-}
-
 export interface Service {
   /** short glyph used as the icon — keep it 1–3 characters */
   icon: string;
@@ -67,14 +59,11 @@ export interface Social {
 export const site = {
   /* ─────────── identity / <head> ─────────── */
   meta: {
-    // TODO: real name
     name: 'Mohsen Serajian',
-    // TODO: real title
-    role: 'Backend Engineer · Go',
-    // TODO: shown in the browser tab and search results
-    title: 'Mohsen Serajian — Backend Engineer',
+    role: 'Senior Backend Developer · Go',
+    title: 'Mohsen Serajian — Senior Backend Developer',
     description:
-      'Backend engineer building APIs, distributed systems and data pipelines in Go.',
+      'Senior backend developer building Go services at the scale of millions of users — event-driven systems, real-time backends and high-throughput pipelines.',
     // sidebar logo: rendered as ~/handle
     handle: 'mohsen',
     /** canonical domain — keep in sync with `site` in astro.config.mjs */
@@ -117,35 +106,60 @@ export const site = {
   },
 
   /* ─────────── the infinite marquee under the hero ─────────── */
+  /* a highlight reel rather than a list of logos — numbers say more than
+     names do, and these are all from shipped work */
   ticker: [
-    'Go',
-    'PostgreSQL',
-    'Redis',
-    'Kafka',
-    'gRPC',
-    'Kubernetes',
-    'Terraform',
-    'Prometheus',
+    'Golang',
+    '3M+ users served',
+    'Event-driven systems',
+    '800k+ concurrent connections',
+    'Domain-driven design',
+    '100k+ uploads a day',
+    'Kafka · Kubernetes',
+    'Postgres · Redis · Scylla',
   ],
 
   /* ─────────── about ─────────── */
   about: {
     overline: '// 02 — information',
     heading: { lead: 'About', dim: 'me' },
-    // TODO: your own words — each string is a paragraph.
-    // Wrap a phrase in <span class="hl">…</span> to brighten it.
+    /* Each string is a paragraph. Wrap a phrase in <span class="hl">…</span>
+       to brighten it. */
     paragraphs: [
-      'I build the parts of a product nobody sees but everybody depends on — <span class="hl">APIs, data pipelines, queues</span>, and the boring machinery that has to stay up at 3am.',
-      'Most of my work is in Go, usually next to Postgres, Redis and Docker. I care about systems simple enough to reason about, observable enough to debug, and dull enough to sleep through.',
+      'I build backend systems that a lot of people are on the other end of. Since 2023 that has been at <span class="hl">Saba Idea</span>, working on <span class="hl">Aparat</span> — one of Iran\'s largest video platforms — where what I write is measured in millions of users rather than requests per second.',
+      'In practice that has meant a short-video pipeline taking <span class="hl">100k+ uploads a day</span>, a live-sports gamification platform for <span class="hl">3M+ users</span> that has to survive the spike the moment a match kicks off, a real-time cast service that turns a phone into a remote and a TV into a screen, and a chat backend holding <span class="hl">800k+ concurrent connections</span>.',
+      'Go is my primary language, usually next to Postgres, Redis, Kafka and Scylla. I care about domain boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing, and systems dull enough to sleep through. Before Aparat I spent a year on national-scale services for Iran\'s Ministry of Education, which is where I learned what "this cannot go down" actually costs.',
     ],
+
+    /**
+     * Portrait next to the text.
+     * Drop the image at `public/me.png` (or change `src` to whatever you
+     * name it). A square-ish crop works best — it is displayed 1:1.
+     */
+    photo: {
+      src: '/me.png',
+      alt: 'Mohsen Serajian',
+      /** the little label under the frame */
+      caption: 'Dubai, UAE',
+    } as { src: string; alt: string; caption: string } | null,
+
     meta: [
-      { label: 'Location', value: 'Tehran, Iran' },
-      { label: 'Experience', value: '6+ years' },
-      { label: 'Languages', value: 'Persian / English' },
-      { label: 'Email', value: 'hello@example.com' },
+      { label: 'Location', value: 'Dubai, UAE' },
+      { label: 'Working since', value: '2018' },
+      { label: 'Languages', value: 'Persian · English' },
+      { label: 'Email', value: 'serajian.mohsen@gmail.com' },
     ] satisfies MetaItem[],
-    // set to null to hide the button
-    cv: { label: 'Download CV ↓', href: '/cv.pdf' } as { label: string; href: string } | null,
+
+    /**
+     * The CV lives at `public/Mohsen-Serajian-Resume.pdf`.
+     * To publish a new version just overwrite that one file — the filename
+     * is what the visitor downloads, so keep the name the same.
+     * Set `cv` to null to hide the button entirely.
+     */
+    cv: { label: 'Download CV ↓', href: '/Mohsen-Serajian-Resume.pdf' } as {
+      label: string;
+      href: string;
+    } | null,
 
     /**
      * The syntax-highlighted card next to the text.
@@ -155,7 +169,7 @@ export const site = {
     codeCard: {
       filename: 'about.go',
       lines: [
-        [{ t: "// who's behind the keyboard", kind: 'comment' }],
+        [{ t: '// serajian.mohsen@gmail.com', kind: 'comment' }],
         [],
         [
           { t: 'package ', kind: 'keyword' },
@@ -169,70 +183,70 @@ export const site = {
           { t: ' {', kind: 'plain' },
         ],
         [
-          { t: '  Name   ', kind: 'plain' },
+          { t: '  Name  ', kind: 'plain' },
           { t: 'string', kind: 'keyword' },
         ],
         [
-          { t: '  Role   ', kind: 'plain' },
+          { t: '  Title ', kind: 'plain' },
           { t: 'string', kind: 'keyword' },
         ],
         [
-          { t: '  Stack  []', kind: 'plain' },
-          { t: 'string', kind: 'keyword' },
-        ],
-        [
-          { t: '  Coffee ', kind: 'plain' },
+          { t: '  Since ', kind: 'plain' },
           { t: 'int', kind: 'keyword' },
+        ],
+        [
+          { t: '  Stack []', kind: 'plain' },
+          { t: 'string', kind: 'keyword' },
+        ],
+        [{ t: '}', kind: 'plain' }],
+        [],
+        [
+          { t: 'var ', kind: 'keyword' },
+          { t: 'me = Engineer{', kind: 'plain' },
+        ],
+        [
+          { t: '  Name:  ', kind: 'plain' },
+          { t: '"Mohsen Serajian"', kind: 'string' },
+          { t: ',', kind: 'plain' },
+        ],
+        [
+          { t: '  Title: ', kind: 'plain' },
+          { t: '"Senior Backend Developer"', kind: 'string' },
+          { t: ',', kind: 'plain' },
+        ],
+        [
+          { t: '  Since: ', kind: 'plain' },
+          { t: '2018', kind: 'number' },
+          { t: ',', kind: 'plain' },
+        ],
+        [
+          { t: '  Stack: []', kind: 'plain' },
+          { t: 'string', kind: 'keyword' },
+          { t: '{', kind: 'plain' },
+          { t: '"Go"', kind: 'string' },
+          { t: ', ', kind: 'plain' },
+          { t: '"Kafka"', kind: 'string' },
+          { t: ', ', kind: 'plain' },
+          { t: '"Scylla"', kind: 'string' },
+          { t: '},', kind: 'plain' },
         ],
         [{ t: '}', kind: 'plain' }],
         [],
         [
           { t: 'func ', kind: 'keyword' },
-          { t: 'New', kind: 'fn' },
-          { t: '() *Engineer {', kind: 'plain' },
+          { t: '(e Engineer) ', kind: 'plain' },
+          { t: 'Scale', kind: 'fn' },
+          { t: '() ', kind: 'plain' },
+          { t: 'string', kind: 'keyword' },
+          { t: ' {', kind: 'plain' },
         ],
         [
           { t: '  return ', kind: 'keyword' },
-          { t: '&Engineer{', kind: 'plain' },
+          { t: '"millions of users, one quiet pager"', kind: 'string' },
         ],
-        [
-          { t: '    Name:   ', kind: 'plain' },
-          { t: '"Mohsen Serajian"', kind: 'string' },
-          { t: ',', kind: 'plain' },
-        ],
-        [
-          { t: '    Role:   ', kind: 'plain' },
-          { t: '"Backend Engineer"', kind: 'string' },
-          { t: ',', kind: 'plain' },
-        ],
-        [
-          { t: '    Stack:  []', kind: 'plain' },
-          { t: 'string', kind: 'keyword' },
-          { t: '{', kind: 'plain' },
-          { t: '"Go"', kind: 'string' },
-          { t: ', ', kind: 'plain' },
-          { t: '"Postgres"', kind: 'string' },
-          { t: ', ', kind: 'plain' },
-          { t: '"Redis"', kind: 'string' },
-          { t: '},', kind: 'plain' },
-        ],
-        [
-          { t: '    Coffee: ', kind: 'plain' },
-          { t: '3', kind: 'number' },
-          { t: ', ', kind: 'plain' },
-          { t: '// per day, minimum', kind: 'comment' },
-        ],
-        [{ t: '  }', kind: 'plain' }],
         [{ t: '}', kind: 'plain' }],
       ],
     },
-
-    stats: [
-      { value: 6, suffix: '+', label: 'Years shipping' },
-      { value: 40, suffix: '+', label: 'Services in prod' },
-      { value: 99, suffix: '.9', label: 'Uptime %' },
-      { value: 12, label: 'Open source repos' },
-    ] satisfies Stat[],
   },
 
   /* ─────────── skills ─────────── */
@@ -240,7 +254,7 @@ export const site = {
     overline: '// 03 — abilities',
     heading: { lead: 'My', dim: 'skills' },
     intro:
-      'A decade of shipping services other teams build on. Below is what I reach for before reading the docs.',
+      'Seven years of shipping services other teams build on. Below is what I reach for before reading the docs.',
     bars: [
       { label: 'Backend & APIs', value: 96 },
       { label: 'Distributed systems', value: 88 },
@@ -357,10 +371,18 @@ export const site = {
     overline: '// 06 — location',
     heading: { lead: 'Contact', dim: 'me' },
     links: [
-      { label: 'Email', value: 'hello@example.com', href: 'mailto:hello@example.com' },
-      { label: 'Phone', value: '+98 —— —— ——', href: 'tel:+98' },
-      { label: 'Address', value: 'Tehran, Iran', href: '#' },
-      { label: 'GitHub', value: 'github.com/mohsen', href: 'https://github.com/' },
+      {
+        label: 'Email',
+        value: 'serajian.mohsen@gmail.com',
+        href: 'mailto:serajian.mohsen@gmail.com',
+      },
+      {
+        label: 'LinkedIn',
+        value: 'in/mohsen-serajian',
+        href: 'https://linkedin.com/in/mohsen-serajian',
+      },
+      { label: 'GitHub', value: 'github.com/Serajian', href: 'https://github.com/Serajian' },
+      { label: 'Location', value: 'Dubai, UAE', href: '#' },
     ] satisfies ContactLink[],
     form: {
       filename: 'message.sh',
@@ -376,10 +398,9 @@ export const site = {
 
   /* ─────────── sidebar socials + footer ─────────── */
   socials: [
-    { label: 'GH', title: 'GitHub', href: 'https://github.com/' },
-    { label: 'IN', title: 'LinkedIn', href: 'https://linkedin.com/' },
-    { label: 'TG', title: 'Telegram', href: 'https://t.me/' },
-    { label: '@', title: 'Email', href: 'mailto:hello@example.com' },
+    { label: 'GH', title: 'GitHub', href: 'https://github.com/Serajian' },
+    { label: 'IN', title: 'LinkedIn', href: 'https://linkedin.com/in/mohsen-serajian' },
+    { label: '@', title: 'Email', href: 'mailto:serajian.mohsen@gmail.com' },
   ] satisfies Social[],
 
   footer: {

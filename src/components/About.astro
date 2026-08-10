@@ -28,7 +28,7 @@ const hue = nav.find((n) => n.id === 'about')?.hue ?? 212;
       {
         about.cv && (
           <div style="margin-top:32px">
-            <a class="btn mag" href={about.cv.href}>
+            <a class="btn mag" href={about.cv.href} download>
               <span>{about.cv.label}</span>
             </a>
           </div>
@@ -36,20 +36,25 @@ const hue = nav.find((n) => n.id === 'about')?.hue ?? 212;
       }
     </div>
 
-    <CodeCard filename={about.codeCard.filename} lines={about.codeCard.lines} class="rv" />
-  </div>
+    <div class="about-side rv">
+      {
+        about.photo && (
+          <figure class="portrait">
+            {/* until the file is dropped in, remove the frame rather than
+                leaving a broken image in the layout */}
+            <img
+              src={about.photo.src}
+              alt={about.photo.alt}
+              width="720"
+              height="720"
+              onerror="this.closest('.portrait')?.remove()"
+            />
+            <figcaption>{about.photo.caption}</figcaption>
+          </figure>
+        )
+      }
 
-  <div class="stats">
-    {
-      about.stats.map((stat, i) => (
-        <div class="stat rv" style={`transition-delay:${i * 0.08}s`}>
-          <b>
-            <span data-c={stat.value}>0</span>
-            {stat.suffix && <i>{stat.suffix}</i>}
-          </b>
-          <k>{stat.label}</k>
-        </div>
-      ))
-    }
+      <CodeCard filename={about.codeCard.filename} lines={about.codeCard.lines} />
+    </div>
   </div>
 </section>

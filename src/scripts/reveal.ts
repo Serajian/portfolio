@@ -128,5 +128,5 @@ export function initCounters(): void {
     { threshold: 0.35 },
   );
 
-  $$('.bars,.stats').forEach((el) => io.observe(el));
+  $$('.bars').forEach((el) => io.observe(el));
 }
