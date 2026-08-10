@@ -94,39 +94,3 @@ export function initReveal(): void {
 
   $$('.sec,.hsec,.rv').forEach((el) => io.observe(el));
 }
-
-/** Skill bars fill and stat numbers count up when they scroll into view. */
-export function initCounters(): void {
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target as HTMLElement;
-        io.unobserve(el);
-
-        el.querySelectorAll<HTMLElement>('.fill').forEach((fill, i) => {
-          window.setTimeout(() => (fill.style.width = `${fill.dataset.w}%`), i * 140);
-        });
-
-        el.querySelectorAll<HTMLElement>('[data-c]').forEach((node, i) => {
-          const to = Number(node.dataset.c);
-          const suffix = node.dataset.suffix ?? '';
-          let n = 0;
-          window.setTimeout(() => {
-            const step = window.setInterval(() => {
-              n += Math.max(1, Math.ceil(to / 45));
-              if (n >= to) {
-                n = to;
-                window.clearInterval(step);
-              }
-              node.textContent = `${n}${suffix}`;
-            }, 24);
-          }, i * 120);
-        });
-      });
-    },
-    { threshold: 0.35 },
-  );
-
-  $$('.bars').forEach((el) => io.observe(el));
-}

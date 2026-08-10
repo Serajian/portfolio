@@ -12,7 +12,9 @@
 :root {
   --hue: 186;
   --accent: hsl(var(--hue) 80% 62%);
-  --accent2: hsl(calc(var(--hue) + 55) 78% 68%);
+  /* +40 keeps the second stop in the same colour family — a wider offset
+     dragged the hero gradient into violet */
+  --accent2: hsl(calc(var(--hue) + 40) 78% 68%);
   --glow: hsl(var(--hue) 90% 60% / 0.45);
 
   --bg: #05070c;
@@ -1198,64 +1200,66 @@ h1 .ln.g::after {
 /* ═══════════════════════════════════════════════════════════
    SKILLS
    ═══════════════════════════════════════════════════════════ */
-.skills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: start;
+.skills-intro {
+  color: var(--muted);
+  max-width: 58ch;
+  margin-bottom: 46px;
 }
-.bars {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
+
+/* Grouped rows rather than cards: the services section below already uses
+   cards, and rows read as a reference list instead of a pitch. */
+.skill-groups {
+  border-top: 1px solid var(--line);
 }
-.bar-h {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  margin-bottom: 9px;
-}
-.bar-h b {
-  font-weight: 500;
-  color: var(--bright);
-}
-.bar-h em {
-  font-style: normal;
-  color: var(--accent);
-}
-.track {
-  height: 3px;
-  background: var(--line);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.fill {
-  height: 100%;
-  width: 0;
-  border-radius: 3px;
+.skill-group {
   position: relative;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  box-shadow: 0 0 16px var(--glow);
-  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  padding: 24px 4px;
+  border-bottom: 1px solid var(--line);
 }
-.fill::after {
+/* an accent rule draws itself across the row on hover */
+.skill-group::after {
   content: '';
   position: absolute;
-  right: 0;
-  top: -3px;
-  width: 2px;
-  height: 9px;
-  background: #fff;
-  box-shadow: 0 0 10px #fff;
-  opacity: 0.9;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transition: width 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.chips {
+.skill-group:hover::after {
+  width: 100%;
+}
+.sg-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--mono);
+}
+.sg-head .idx {
+  font-size: 10px;
+  color: var(--accent);
+}
+.sg-head h3 {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bright);
+}
+.sg-head .count {
+  margin-left: auto;
+  font-size: 10px;
+  color: #3f4864;
+}
+.sg-items {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 8px;
+  align-content: start;
 }
 .chip {
   font-family: var(--mono);
@@ -1552,7 +1556,7 @@ h1 .ln.g::after {
   margin-bottom: 8px;
 }
 .field label {
-  color: var(--purple);
+  color: #7aa2f7;
   white-space: nowrap;
 }
 .field input,

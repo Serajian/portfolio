@@ -4,7 +4,7 @@ import { initCurtain } from './curtain';
 import { initCursor, updateCursor } from './cursor';
 import { initNameGlitch, initTyper, measureHero, revealHero, updateHero } from './hero';
 import { initPointer, updatePointer } from './pointer';
-import { initCounters, initReveal } from './reveal';
+import { initReveal } from './reveal';
 import { initScroll, measureHorizontal, updateScroll } from './scroll';
 import { initSound } from './sound';
 import { reducedMotion } from './utils';
@@ -25,7 +25,6 @@ function main(): void {
   initCurtain();
   initScroll();
   initReveal();
-  initCounters();
   initTyper();
   initBackground();
 

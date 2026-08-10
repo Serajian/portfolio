@@ -3,36 +3,30 @@ import { site } from '../data/site';
 import SectionHead from './SectionHead.astro';
 
 const { skills, nav } = site;
-const hue = nav.find((n) => n.id === 'skills')?.hue ?? 268;
+const hue = nav.find((n) => n.id === 'skills')?.hue ?? 42;
 ---
 
 <section class="sec" id="skills" data-hue={hue}>
   <SectionHead overline={skills.overline} lead={skills.heading.lead} dim={skills.heading.dim} />
 
-  <div class="skills-grid">
-    <div class="bars rv">
-      {
-        skills.bars.map((bar) => (
-          <div>
-            <div class="bar-h">
-              <b>{bar.label}</b>
-              <em data-c={bar.value} data-suffix="%">
-                0%
-              </em>
-            </div>
-            <div class="track">
-              <div class="fill" data-w={bar.value} />
-            </div>
-          </div>
-        ))
-      }
-    </div>
+  <p class="skills-intro rv">{skills.intro}</p>
 
-    <div class="rv" style="transition-delay:.12s">
-      <p style="color:var(--muted);margin-bottom:22px;max-width:50ch">{skills.intro}</p>
-      <div class="chips">
-        {skills.chips.map((chip) => <span class="chip">{chip}</span>)}
-      </div>
-    </div>
+  <div class="skill-groups">
+    {
+      skills.groups.map((group, i) => (
+        <div class="skill-group rv" style={`transition-delay:${i * 0.08}s`}>
+          <div class="sg-head">
+            <span class="idx">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{group.label}</h3>
+            <span class="count">{String(group.items.length).padStart(2, '0')}</span>
+          </div>
+          <div class="sg-items">
+            {group.items.map((item) => (
+              <span class="chip">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>

@@ -21,10 +21,9 @@ export interface MetaItem {
   value: string;
 }
 
-export interface Skill {
+export interface SkillGroup {
   label: string;
-  /** 0–100 */
-  value: number;
+  items: string[];
 }
 
 export interface Service {
@@ -75,13 +74,15 @@ export const site = {
   },
 
   /* ─────────── navigation + per-section accent colour ─────────── */
+  /* Hues deliberately avoid the 250–330 purple/pink arc. Neighbours in the
+     scroll order are kept far apart so the shift between sections reads. */
   nav: [
     { id: 'home', label: 'HOME', hue: 186 },
     { id: 'about', label: 'ABOUT', hue: 212 },
-    { id: 'skills', label: 'SKILLS', hue: 268 },
+    { id: 'skills', label: 'SKILLS', hue: 42 },
     { id: 'services', label: 'SERVICES', hue: 152 },
-    { id: 'projects', label: 'PROJECTS', hue: 28 },
-    { id: 'contact', label: 'CONTACT', hue: 322 },
+    { id: 'projects', label: 'PROJECTS', hue: 20 },
+    { id: 'contact', label: 'CONTACT', hue: 96 },
   ] satisfies NavItem[],
 
   /* ─────────── hero ─────────── */
@@ -173,27 +174,39 @@ export const site = {
     overline: '// 03 — abilities',
     heading: { lead: 'My', dim: 'skills' },
     intro:
-      'Seven years of shipping services other teams build on. Below is what I reach for before reading the docs.',
-    bars: [
-      { label: 'Backend & APIs', value: 96 },
-      { label: 'Distributed systems', value: 88 },
-      { label: 'Databases', value: 92 },
-      { label: 'DevOps & infra', value: 84 },
-    ] satisfies Skill[],
-    chips: [
-      'Go',
-      'gRPC',
-      'PostgreSQL',
-      'Redis',
-      'Kafka',
-      'NATS',
-      'Docker',
-      'Kubernetes',
-      'Terraform',
-      'Prometheus',
-      'GitLab CI',
-      'Linux',
-    ],
+      'Seven years of shipping services other teams build on. No percentage bars — either I have used something in production or it is not on this list.',
+    /* Grouped rather than ranked. Order inside a group is roughly how often
+       I reach for it. */
+    groups: [
+      {
+        label: 'Languages',
+        items: ['Go', 'JavaScript', 'SQL'],
+      },
+      {
+        label: 'Architecture',
+        items: [
+          'Domain-Driven Design',
+          'Clean / Hexagonal',
+          'Microservices',
+          'Event-Driven Systems',
+          'RESTful APIs',
+          'WebSocket',
+        ],
+      },
+      {
+        label: 'Data',
+        items: ['PostgreSQL', 'Redis', 'ScyllaDB', 'Cassandra', 'MongoDB', 'MySQL'],
+      },
+      {
+        label: 'Platform',
+        items: ['Kafka', 'Docker', 'Kubernetes', 'Linux', 'Git'],
+      },
+      {
+        // TODO: swap these for the chains and tooling you actually use
+        label: 'Blockchain',
+        items: ['Smart contracts', 'Web3 backends'],
+      },
+    ] satisfies SkillGroup[],
   },
 
   /* ─────────── services ─────────── */
