@@ -667,33 +667,90 @@ h1 {
 }
 h1 .ln {
   display: block;
+  /* clipped so the letters rise out from behind the line — dropped once the
+     entrance finishes so the hover glow isn't cut off */
   overflow: hidden;
   padding-bottom: 0.06em;
 }
+h1.landed .ln {
+  overflow: visible;
+}
+
+/* .ch owns the entrance, .chi owns the pointer reaction — two elements so
+   the finished `forwards` animation never fights the per-frame transform */
 h1 .ch {
   display: inline-block;
-  transform: translateY(115%) rotate(6deg);
-  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateY(120%) rotate(7deg) scale(1.12);
+  filter: blur(10px);
+  opacity: 0;
+  animation: rise 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
 }
 @keyframes rise {
-  to {
+  0% {
+    transform: translateY(120%) rotate(7deg) scale(1.12);
+    filter: blur(10px);
+    opacity: 0;
+  }
+  55% {
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
     transform: none;
+    filter: blur(0);
+    opacity: 1;
   }
 }
-h1 .accent .ch {
-  background: linear-gradient(100deg, var(--accent), var(--accent2));
+
+h1 .chi {
+  display: inline-block;
+  will-change: transform;
+  transform: translate3d(0, var(--lift, 0px), 0) scale(var(--sc, 1));
+  /* a highlight band travels across the name; the per-letter delay is what
+     turns it from a flash into a sweep */
+  background-size: 280% 100%;
+  background-position: 100% 0;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  background-image: linear-gradient(100deg, #dde5f7 0 36%, #ffffff 50%, #dde5f7 64% 100%);
+  animation: shine 7s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 65ms);
+  text-shadow: 0 0 calc(var(--g, 0) * 46px) hsl(var(--hue) 95% 70% / var(--g, 0));
 }
-h1 .ln:first-child {
-  animation: chroma 7s ease-in-out infinite;
+h1 .accent .chi {
+  background-image: linear-gradient(
+    100deg,
+    var(--accent) 0 34%,
+    #ffffff 50%,
+    var(--accent2) 66% 100%
+  );
 }
-@keyframes chroma {
-  0%, 92%, 100% { text-shadow: none; }
-  93% { text-shadow: -4px 0 #ff2e63, 4px 0 #12f7ff; }
-  95% { text-shadow: 5px 0 #ff2e63, -5px 0 #12f7ff; }
-  97% { text-shadow: -2px 0 #ff2e63, 2px 0 #12f7ff; }
+@keyframes shine {
+  0%,
+  70% {
+    background-position: 100% 0;
+  }
+  93%,
+  100% {
+    background-position: 0 0;
+  }
+}
+/* the shine paints through background-clip:text — without it the name would
+   be transparent, so fall back to flat colour */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  h1 .chi {
+    background-image: none;
+    color: var(--bright);
+  }
+  h1 .accent .chi {
+    color: var(--accent);
+  }
+  .hero .fa .wi {
+    background-image: none;
+    color: var(--muted);
+  }
 }
 
 /* Persian name under the latin one — small, dim, revealed right-to-left.
@@ -707,23 +764,40 @@ h1 .ln:first-child {
   line-height: 1.9;
   color: var(--muted);
   margin: -10px 0 28px;
+}
+/* split by word, never by letter — Persian is a connected script and
+   per-letter spans break the joining forms */
+.hero .fa .w {
+  display: inline-block;
   opacity: 0;
-  clip-path: inset(0 100% 0 0);
+  animation: faWordIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
 }
-.hero .fa.shown {
-  animation: faIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes faIn {
+@keyframes faWordIn {
   from {
     opacity: 0;
-    clip-path: inset(0 100% 0 0);
-    transform: translateY(6px);
+    transform: translateX(22px);
+    filter: blur(7px);
   }
   to {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: none;
+    filter: blur(0);
   }
+}
+.hero .fa .wi {
+  display: inline-block;
+  will-change: transform;
+  transform: translate3d(0, var(--lift, 0px), 0);
+  background-size: 280% 100%;
+  background-position: 100% 0;
+  background-image: linear-gradient(100deg, #6b7590 0 36%, #d7e0f5 50%, #6b7590 64% 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 7s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 220ms);
+  text-shadow: 0 0 calc(var(--g, 0) * 22px) hsl(var(--hue) 92% 72% / calc(var(--g, 0) * 0.7));
 }
 
 .typer {

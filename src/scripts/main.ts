@@ -2,7 +2,7 @@ import { initBackground, resizeBackground, updateBackground } from './background
 import { runBoot } from './boot';
 import { initCurtain } from './curtain';
 import { initCursor, updateCursor } from './cursor';
-import { initTyper, revealHero } from './hero';
+import { initTyper, measureHero, revealHero, updateHero } from './hero';
 import { initPointer, updatePointer } from './pointer';
 import { initCounters, initReveal } from './reveal';
 import { initScroll, measureHorizontal, updateScroll } from './scroll';
@@ -13,6 +13,7 @@ function frame(): void {
   updatePointer();
   updateScroll();
   updateCursor();
+  updateHero();
   updateBackground();
   requestAnimationFrame(frame);
 }
@@ -31,7 +32,11 @@ function main(): void {
   window.addEventListener('resize', () => {
     resizeBackground();
     measureHorizontal();
+    measureHero();
   });
+
+  // glyph boxes move once the webfont swaps in
+  void document.fonts?.ready.then(measureHero);
 
   // the hero only animates once the boot curtain has lifted
   void runBoot().then(revealHero);
