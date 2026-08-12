@@ -29,8 +29,8 @@ const personSchema = {
   email: `mailto:${site.contact.links.find((l) => l.label === 'Email')?.value ?? ''}`,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Dubai',
-    addressCountry: 'AE',
+    addressLocality: site.meta.location.city,
+    addressCountry: site.meta.location.countryCode,
   },
   knowsLanguage: ['fa', 'en'],
   knowsAbout: site.skills.groups.flatMap((g) => g.items).slice(0, 20),

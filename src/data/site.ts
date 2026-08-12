@@ -11,6 +11,14 @@
 import type { IconName } from '../components/Icon.astro';
 import { CAREER_START } from '../lib/experience';
 
+/**
+ * One place for where I am. It shows up in the about table, the portrait
+ * caption, the contact list and the structured data — four copies that used
+ * to be edited by hand and could drift apart.
+ */
+const LOCATION = { city: 'Istanbul', country: 'Türkiye', countryCode: 'TR' } as const;
+const LOCATION_LABEL = `${LOCATION.city}, ${LOCATION.country}`;
+
 export interface NavItem {
   /** must match the section's DOM id */
   id: string;
@@ -79,6 +87,7 @@ export const site = {
     aliasDomain: 'serajianmohsen.ir',
     /** shown next to the pulsing green dot in the sidebar */
     availability: 'available for work',
+    location: LOCATION,
   },
 
   /* ─────────── navigation + per-section accent colour ─────────── */
@@ -158,11 +167,11 @@ export const site = {
     photo: {
       alt: 'Mohsen Serajian',
       /** the little label in the corner of the frame */
-      caption: 'Dubai, UAE',
+      caption: LOCATION_LABEL,
     } as { alt: string; caption: string } | null,
 
     meta: [
-      { label: 'Location', value: 'Dubai, UAE' },
+      { label: 'Location', value: LOCATION_LABEL },
       { label: 'Working since', value: String(CAREER_START.year) },
       { label: 'Languages', value: 'Persian · English' },
       { label: 'Email', value: 'serajian.mohsen@gmail.com' },
@@ -372,7 +381,7 @@ export const site = {
         href: 'https://github.com/Serajian',
         icon: 'github',
       },
-      { label: 'Location', value: 'Dubai, UAE', href: '#', icon: 'location' },
+      { label: 'Location', value: LOCATION_LABEL, href: '#', icon: 'location' },
     ] satisfies ContactLink[],
     /* No form: a static site can't send mail on its own, and a contact form
        that needs a third party to work is worse than an address that always
