@@ -144,3 +144,18 @@ Before the first deploy, set the real domain in two places:
 Static hosting cannot process a POST, and a form that needs a third party to
 work is worse than an address that always does. The contact section lists email,
 Telegram, LinkedIn and GitHub instead — all of them one tap away.
+
+## Building your own from this
+
+Fork it and follow [SETUP.md](SETUP.md). Everything the site says is in
+`src/data/site.ts`, so it is mostly a copy-editing job — the file is written to
+be handed to an AI assistant: *"read SETUP.md and set this site up with my
+details"*.
+
+It ships with my name, bio, projects, photo and CV, so step 6 of that guide is
+a grep for anything of mine you have missed. Run it.
+
+## Licence
+
+MIT — see [LICENSE](LICENSE). Use it, change it, ship it; just keep the notice.
+The content, the photo and the CV are mine, not part of the licence.
