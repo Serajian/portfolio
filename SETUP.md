@@ -11,6 +11,8 @@ answer, leave the field and tell them what is still missing at the end. Step 6
 is not optional: this repo starts full of someone else's real content, and the
 usual failure is shipping with some of it left in.
 
+**فارسی:** [SETUP.fa.md](SETUP.fa.md)
+
 **If you are a human:** hand this file to Claude — "read SETUP.md and set this
 site up with my details" — or work through it yourself.
 

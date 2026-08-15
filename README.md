@@ -147,7 +147,7 @@ Telegram, LinkedIn and GitHub instead — all of them one tap away.
 
 ## Building your own from this
 
-Fork it and follow [SETUP.md](SETUP.md). Everything the site says is in
+Fork it and follow [SETUP.md](SETUP.md) ([فارسی](SETUP.fa.md)). Everything the site says is in
 `src/data/site.ts`, so it is mostly a copy-editing job — the file is written to
 be handed to an AI assistant: *"read SETUP.md and set this site up with my
 details"*.
