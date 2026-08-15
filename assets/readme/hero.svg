@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="420" viewBox="0 0 1200 420"
+     role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">~/portfolio — the source of mohsenserajian.ir</title>
+  <desc id="hero-desc">A one-page personal site built with Astro. All copy lives in src/data/site.ts, whose nav array assigns one accent hue to each of the six sections: home 186, about 212, skills 42, services 152, projects 20, contact 96.</desc>
+
+  <defs>
+    <!-- the six nav hues, in scroll order — the site's own spectrum -->
+    <linearGradient id="spectrum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.00" stop-color="#51DCEC"/>
+      <stop offset="0.20" stop-color="#5199EC"/>
+      <stop offset="0.40" stop-color="#ECBD51"/>
+      <stop offset="0.60" stop-color="#51ECA3"/>
+      <stop offset="0.80" stop-color="#EC8451"/>
+      <stop offset="1.00" stop-color="#8FEC51"/>
+    </linearGradient>
+
+    <!-- the hero's cyan bloom, as the WebGL background renders it on /home -->
+    <radialGradient id="bloom" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#51DCEC" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#51DCEC" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eef3ff"/>
+      <stop offset="1" stop-color="#cfe0f5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="420" rx="26" fill="#06090f"/>
+  <ellipse cx="960" cy="90" rx="440" ry="300" fill="url(#bloom)"/>
+  <rect x="0.75" y="0.75" width="1198.5" height="418.5" rx="25.25" fill="none" stroke="#141b28" stroke-width="1.5"/>
+
+  <!-- ── identity ─────────────────────────────────────────── -->
+  <g id="title-block" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <text x="64" y="90" font-size="18" letter-spacing="2.5" fill="#51DCEC">// 00 — REPOSITORY</text>
+    <line x1="336" y1="84" x2="640" y2="84" stroke="#1c2333" stroke-width="1.5"/>
+
+    <text x="64" y="182" font-size="58" font-weight="700" letter-spacing="-1">
+      <tspan fill="#51DCEC">~/</tspan><tspan fill="url(#name)">portfolio</tspan>
+    </text>
+    <rect x="454" y="144" width="18" height="46" fill="#51DCEC"/>
+
+    <text x="64" y="238" font-size="25" fill="#c6cee8"
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">The source of mohsenserajian.ir — one page,</text>
+    <text x="64" y="272" font-size="25" fill="#c6cee8"
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">one content file, six accent hues.</text>
+
+    <text x="64" y="336" font-size="17" letter-spacing="1.2" fill="#6b7590">ASTRO 5 · STATIC · NO UI FRAMEWORK · DOCKER + NGINX</text>
+    <text x="64" y="378" font-size="19" fill="#51DCEC">↗ mohsenserajian.ir</text>
+  </g>
+
+  <!-- the rail's accent edge, carrying every hue at once -->
+  <rect x="690" y="56" width="2" height="324" fill="url(#spectrum)"/>
+
+  <!-- ── real project material: the nav array from src/data/site.ts ── -->
+  <g id="project-proof" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <text x="730" y="98" font-size="18" fill="#6b7590">src/data/site.ts → nav[]</text>
+
+    <rect x="730" y="112" width="406" height="256" rx="12" fill="#0b1018" stroke="#1c2333" stroke-width="1.5"/>
+
+    <text x="760" y="152" font-size="16" letter-spacing="1.6" fill="#6b7590">SECTION</text>
+    <text x="1056" y="152" font-size="16" letter-spacing="1.6" fill="#6b7590" text-anchor="end">HUE</text>
+    <line x1="756" y1="168" x2="1110" y2="168" stroke="#1c2333" stroke-width="1.5"/>
+
+    <g font-size="19">
+      <g>
+        <text x="760" y="199" fill="#4a5470">01</text>
+        <text x="800" y="199" fill="#c6cee8">home</text>
+        <text x="1056" y="199" fill="#51DCEC" text-anchor="end">186</text>
+        <rect x="1072" y="192" width="38" height="8" rx="4" fill="#51DCEC"/>
+      </g>
+      <g>
+        <text x="760" y="227" fill="#4a5470">02</text>
+        <text x="800" y="227" fill="#c6cee8">about</text>
+        <text x="1056" y="227" fill="#5199EC" text-anchor="end">212</text>
+        <rect x="1072" y="220" width="38" height="8" rx="4" fill="#5199EC"/>
+      </g>
+      <g>
+        <text x="760" y="255" fill="#4a5470">03</text>
+        <text x="800" y="255" fill="#c6cee8">skills</text>
+        <text x="1056" y="255" fill="#ECBD51" text-anchor="end">42</text>
+        <rect x="1072" y="248" width="38" height="8" rx="4" fill="#ECBD51"/>
+      </g>
+      <g>
+        <text x="760" y="283" fill="#4a5470">04</text>
+        <text x="800" y="283" fill="#c6cee8">services</text>
+        <text x="1056" y="283" fill="#51ECA3" text-anchor="end">152</text>
+        <rect x="1072" y="276" width="38" height="8" rx="4" fill="#51ECA3"/>
+      </g>
+      <g>
+        <text x="760" y="311" fill="#4a5470">05</text>
+        <text x="800" y="311" fill="#c6cee8">projects</text>
+        <text x="1056" y="311" fill="#EC8451" text-anchor="end">20</text>
+        <rect x="1072" y="304" width="38" height="8" rx="4" fill="#EC8451"/>
+      </g>
+      <g>
+        <text x="760" y="339" fill="#4a5470">06</text>
+        <text x="800" y="339" fill="#c6cee8">contact</text>
+        <text x="1056" y="339" fill="#8FEC51" text-anchor="end">96</text>
+        <rect x="1072" y="332" width="38" height="8" rx="4" fill="#8FEC51"/>
+      </g>
+    </g>
+
+    <text x="730" y="396" font-size="17" fill="#6b7590">hue → accent · gradient · glow · WebGL</text>
+  </g>
+</svg>
