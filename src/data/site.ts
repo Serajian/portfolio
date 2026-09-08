@@ -342,6 +342,12 @@ export const site = {
         body: "National-scale services for Iran's largest government organisation: financial aid, loans, registration and core administrative systems. The requirement that shaped every decision was that they cannot go down.",
         href: null,
       },
+      {
+        code: '007 / HOMA',
+        title: 'Homa',
+        body: 'A peer-to-peer terminal chat, open source and mine. Two people exchange one address and then talk directly — WireGuard through NAT, with a relay only when no direct path can be made. No accounts, nothing in the middle that keeps messages, and either side can call.',
+        href: 'https://github.com/Serajian/homa',
+      },
     ] satisfies Project[],
     /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
