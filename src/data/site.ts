@@ -348,6 +348,12 @@ export const site = {
         body: 'A peer-to-peer terminal chat, open source and mine. Two people exchange one address and then talk directly — WireGuard through NAT, with a relay only when no direct path can be made. No accounts, nothing in the middle that keeps messages, and either side can call.',
         href: 'https://github.com/Serajian/homa',
       },
+      {
+        code: '008 / SROSHA',
+        title: 'Srosha',
+        body: 'An asynchronous notification service. A client submits once over gRPC and is acknowledged immediately; delivery happens out of band across eight channels — email, Telegram, WhatsApp, Matrix, mobile push — at least once, with per-channel retry. Intake and delivery scale and fail apart, so a dead provider never stops a request being accepted.',
+        href: 'https://github.com/Serajian/srosha',
+      },
     ] satisfies Project[],
     /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
