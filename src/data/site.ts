@@ -351,7 +351,7 @@ export const site = {
       {
         code: '008 / SROSHA',
         title: 'Srosha',
-        body: 'An asynchronous notification service. A client submits once over gRPC and is acknowledged immediately; delivery happens out of band across eight channels — email, Telegram, WhatsApp, Matrix, mobile push — at least once, with per-channel retry. Intake and delivery scale and fail apart, so a dead provider never stops a request being accepted.',
+        body: 'An asynchronous notification service. One gRPC call is acknowledged immediately, then delivered out of band across eight channels, at least once, with per-channel retry. Intake and delivery scale apart, so a dead provider never blocks a new request.',
         href: 'https://github.com/Serajian/srosha',
       },
       {
