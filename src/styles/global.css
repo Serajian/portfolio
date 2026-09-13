@@ -14,7 +14,7 @@
   --accent: hsl(var(--hue) 80% 62%);
   /* +40 keeps the second stop in the same colour family — a wider offset
      dragged the hero gradient into violet */
-  --accent2: hsl(calc(var(--hue) + 40) 78% 68%);
+  --accent2: hsl(calc(var(--hue) + 18) 78% 68%);
   --glow: hsl(var(--hue) 90% 60% / 0.45);
 
   --bg: #05070c;
@@ -23,7 +23,7 @@
   --line: #1c2333;
   --text: #c6cee8;
   --bright: #eef3ff;
-  --muted: #6b7590;
+  --muted: #7d88a4;
   --green: #9ece6a;
   --orange: #ff9e64;
   --purple: #bb9af7;
@@ -59,7 +59,6 @@ body {
   font-size: 16px;
   line-height: 1.65;
   overflow-x: hidden;
-  cursor: none;
 }
 
 ::selection {
@@ -117,7 +116,7 @@ body.no-gl #gl {
   height: 44vw;
   right: -8vw;
   top: 22vh;
-  background: radial-gradient(circle, hsl(calc(var(--hue) + 70) 80% 48% / 0.45), transparent 65%);
+  background: radial-gradient(circle, hsl(calc(var(--hue) + 22) 80% 48% / 0.45), transparent 65%);
   animation: drift2 33s ease-in-out infinite;
 }
 @keyframes drift1 {
@@ -183,7 +182,9 @@ body.pointer-live .cur-dot,
 body.pointer-live .cur-ring {
   opacity: 1;
 }
+/* the native pointer is back, so the dot would only double it */
 .cur-dot {
+  display: none;
   width: 6px;
   height: 6px;
   background: #fff;
@@ -502,7 +503,6 @@ nav a.on .n {
   background: transparent;
   border: 1px solid transparent;
   padding: 0;
-  cursor: none;
 }
 .socials .snd .off {
   display: none;
@@ -579,6 +579,7 @@ main {
   width: 220px;
 }
 .sec-head h2 {
+  font-family: 'Geist Variable', var(--sans);
   font-size: clamp(2.2rem, 4.8vw, 3.7rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -660,6 +661,7 @@ main {
    ═══════════════════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -680,6 +682,7 @@ main {
   color: var(--green);
 }
 h1 {
+  font-family: 'Geist Variable', var(--sans);
   font-size: clamp(3rem, 9vw, 7.2rem);
   line-height: 0.9;
   letter-spacing: -0.055em;
@@ -952,7 +955,6 @@ h1 .ln.g::after {
   overflow: hidden;
   display: inline-block;
   will-change: transform;
-  cursor: none;
   transition: color 0.2s, border-color 0.3s, box-shadow 0.35s;
 }
 .btn span {
@@ -1244,7 +1246,7 @@ h1 .ln.g::after {
 .sg-head .count {
   margin-left: auto;
   font-size: 10px;
-  color: #3f4864;
+  color: var(--muted);
 }
 .sg-items {
   display: flex;
@@ -1260,7 +1262,6 @@ h1 .ln.g::after {
   background: var(--panel);
   padding: 7px 13px;
   border-radius: 20px;
-  cursor: none;
   transition: 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .chip:hover {
@@ -1404,7 +1405,6 @@ h1 .ln.g::after {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  cursor: none;
   transition: border-color 0.35s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
 }
 .pcard::before {
@@ -1663,6 +1663,34 @@ footer a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   KEYBOARD
+   ═══════════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.skip {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 120;
+  padding: 10px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--bright);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.2s;
+}
+.skip:focus {
+  transform: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 1080px) {
@@ -1693,9 +1721,10 @@ footer a:hover {
     width: 100%;
     height: auto;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
-    padding: 8px 14px;
+    gap: 2px 12px;
+    padding: 10px 14px 0;
     border-right: none;
     border-bottom: 1px solid var(--line);
     background: rgb(7 10 17 / 0.92);
@@ -1713,8 +1742,11 @@ footer a:hover {
   .logo { font-size: 16px; }
   .rail .role,
   .rail-foot { display: none; }
+  /* its own full-width row: next to the logo, CONTACT sat 140px off-screen */
   nav {
-    margin: 0 0 0 auto;
+    margin: 0;
+    flex-basis: 100%;
+    justify-content: space-between;
     flex-direction: row;
     gap: 0;
     overflow-x: auto;
@@ -1726,9 +1758,13 @@ footer a:hover {
     /* without flex:none the labels get squeezed and clipped mid-word */
     flex: none;
     white-space: nowrap;
-    padding: 10px 9px;
+    /* five labels on one row with ~20px to spare at 375px; below ~330px the
+       row scrolls, which is the fallback rather than the plan */
+    padding: 10px 5px;
     font-size: 11px;
   }
+  /* the logo already goes home */
+  nav a[data-s='home'] { display: none; }
   nav a:hover { transform: none; }
   nav a .n { display: none; }
   nav a::before {

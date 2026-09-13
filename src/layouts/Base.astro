@@ -1,6 +1,8 @@
 ---
 /* self-hosted — arabic subset at one weight, for the Persian name only */
 import '@fontsource/vazirmatn/arabic-400.css';
+/* self-hosted display face for the headings; unicode-range keeps it to latin */
+import '@fontsource-variable/geist';
 import '../styles/global.css';
 import { site } from '../data/site';
 
@@ -71,6 +73,17 @@ const personSchema = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+
+    {
+      site.analytics.cloudflareToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: site.analytics.cloudflareToken })}
+        />
+      )
+    }
   </head>
 
   <body>

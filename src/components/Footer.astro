@@ -4,6 +4,7 @@ import { site } from '../data/site';
 
 <footer>
   <span>{site.footer.left}</span>
+  {site.footer.links.length > 0 && (
   <span>
     {
       site.footer.links.map((link, i) => (
@@ -14,4 +15,5 @@ import { site } from '../data/site';
       ))
     }
   </span>
+  )}
 </footer>

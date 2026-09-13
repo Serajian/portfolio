@@ -7,7 +7,7 @@
  * Re-run it after changing the name, title or domain in src/data/site.ts.
  */
 
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -94,7 +94,13 @@ if (existsSync(PORTRAIT)) {
   });
 }
 
-await sharp(Buffer.from(svg)).composite(layers).png({ compressionLevel: 9 }).toFile(OUT);
+/* palette PNG: the full-colour one was ~350 kB, and WhatsApp drops preview
+   images past roughly 300 kB without saying so */
+await sharp(Buffer.from(svg))
+  .composite(layers)
+  .png({ compressionLevel: 9, palette: true, quality: 90, effort: 10 })
+  .toFile(OUT);
 
 const out = await sharp(OUT).metadata();
-console.log(`og.png  ${out.width}×${out.height}  ${(out.size / 1024).toFixed(0)}kB`);
+/* metadata() has no size for a file on disk, which printed NaN */
+console.log(`og.png  ${out.width}×${out.height}  ${(statSync(OUT).size / 1024).toFixed(0)}kB`);

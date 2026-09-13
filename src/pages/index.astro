@@ -13,10 +13,11 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base>
+  <a class="skip" href="#main">Skip to content</a>
   <Overlays />
   <Rail />
 
-  <main>
+  <main id="main" tabindex="-1">
     <Hero />
     <Ticker />
     <About />
