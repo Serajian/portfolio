@@ -120,7 +120,6 @@ export const site = {
     roles: [
       "I'm a backend developer",
       "I'm a software engineer",
-      "I'm a blockchain developer",
       "I'm a distributed systems engineer",
       "I'm a freelancer",
     ],
@@ -133,12 +132,9 @@ export const site = {
     'Golang',
     '3M+ users served',
     'Event-driven systems',
-    'Blockchain',
     '800k+ concurrent connections',
-    'Smart contracts',
     'Domain-driven design',
     '100k+ uploads a day',
-    'Solidity · EVM',
     'Kafka · Kubernetes',
     'Postgres · Redis · Scylla',
   ],
@@ -155,7 +151,7 @@ export const site = {
     paragraphs: [
       'I build backend systems that a lot of people are on the other end of. Most of my work has been on <span class="hl">high-traffic consumer platforms</span> — video, live sports, real-time messaging — where the interesting problems only show up once you have millions of users and a spike nobody scheduled.',
       'In practice that has meant short-video pipelines taking <span class="hl">100k+ uploads a day</span>, gamification systems for <span class="hl">3M+ users</span> that have to hold the moment a match kicks off, real-time services that let a phone drive a TV across the room, and chat backends carrying <span class="hl">800k+ concurrent connections</span>. Before that, national-scale government platforms where "this cannot go down" was the entire requirement.',
-      'Go is my primary language, usually next to Postgres, Redis, Kafka and Scylla, and more recently <span class="hl">blockchain and smart-contract systems</span>. I care about domain boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing, and systems dull enough to sleep through.',
+      'Go is my primary language, usually next to Postgres, Redis, Kafka and Scylla. In my own projects I have been going deeper into <span class="hl">blockchain and smart contracts</span>. I care about domain boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing, and systems dull enough to sleep through.',
     ],
 
     /**
@@ -196,7 +192,7 @@ export const site = {
     /* {years} is filled from CAREER_START — at build time and again in the
        browser, so the number is never stale. */
     intro:
-      '{years} years of shipping services other teams build on. No percentage bars — either I have used something in production or it is not on this list.',
+      '{years} years of shipping services other teams build on. No percentage bars — everything here has run in production, except what is marked as personal projects.',
     /* Grouped rather than ranked. Order inside a group is roughly how often
        I reach for it. */
     groups: [
@@ -234,7 +230,7 @@ export const site = {
         items: ['Unit & integration tests', 'testify', 'Mocking', 'Benchmarks', 'pprof profiling'],
       },
       {
-        label: 'Blockchain',
+        label: 'Blockchain · personal projects',
         items: [
           'Solidity',
           'go-ethereum',
@@ -283,9 +279,9 @@ export const site = {
         body: 'Systems that hold when a live event starts: hot paths profiled with pprof, traces and dashboards in place before launch, capacity decided ahead of the spike instead of during it.',
       },
       {
-        icon: '⬡',
-        title: 'Blockchain & Smart Contracts',
-        body: 'Solidity contracts, event indexers, node operations and wallet and key handling across EVM chains, TON, Solana and Cosmos.',
+        icon: '✓',
+        title: 'Testing & Delivery',
+        body: 'Hermetic tests that run in seconds, benchmarks and pprof before an optimisation rather than after it, and CI that publishes releases people install with brew or apt.',
       },
       {
         icon: '◈',
@@ -364,7 +360,7 @@ export const site = {
     /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
       title: '+ plenty<br>more',
-      body: '{years} years of services that never got a landing page — internal APIs, data migrations, integrations, ops tooling. Plus <span class="hl">blockchain and crypto work an NDA keeps me from describing</span>.',
+      body: '{years} years of services that never got a landing page — internal APIs, data migrations, integrations, ops tooling.',
       cta: 'The CV has the full list',
       href: '/Mohsen-Serajian-Resume.pdf',
     },
