@@ -56,7 +56,8 @@ export interface Project {
 export interface ContactLink {
   label: string;
   value: string;
-  href: string;
+  /** null renders the row without a link */
+  href: string | null;
   icon: IconName;
 }
 
@@ -88,6 +89,15 @@ export const site = {
     /** shown next to the pulsing green dot in the sidebar */
     availability: 'available for work',
     location: LOCATION,
+  },
+
+  /* ─────────── analytics ─────────── */
+  /* Cloudflare Web Analytics: cookieless, so no consent banner. Paste the
+     token from Cloudflare → Analytics & Logs → Web Analytics → Add a site.
+     null loads nothing. (If the domain is proxied through Cloudflare, the
+     dashboard can also inject it with no token here at all.) */
+  analytics: {
+    cloudflareToken: null as string | null,
   },
 
   /* ─────────── navigation + per-section accent colour ─────────── */
@@ -395,7 +405,7 @@ export const site = {
         href: 'https://github.com/Serajian',
         icon: 'github',
       },
-      { label: 'Location', value: LOCATION_LABEL, href: '#', icon: 'location' },
+      { label: 'Location', value: LOCATION_LABEL, href: null, icon: 'location' },
     ] satisfies ContactLink[],
     /* No form: a static site can't send mail on its own, and a contact form
        that needs a third party to work is worse than an address that always
@@ -413,10 +423,9 @@ export const site = {
 
   footer: {
     left: '© 2026 Mohsen Serajian — built with too much coffee',
-    links: [
-      { label: 'Impressum', href: '#' },
-      { label: 'Privacy', href: '#' },
-    ],
+    /* no legal pages: nothing here collects data, and an Impressum is a
+       German requirement this site is not under */
+    links: [] as { label: string; href: string }[],
   },
 
   /* ─────────── boot sequence ─────────── */

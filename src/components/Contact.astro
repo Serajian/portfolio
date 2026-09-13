@@ -6,7 +6,7 @@ import SectionHead from './SectionHead.astro';
 const { contact, nav } = site;
 const hue = nav.find((n) => n.id === 'contact')?.hue ?? 96;
 
-const isExternal = (href: string) => href.startsWith('http');
+const isExternal = (href: string | null) => !!href?.startsWith('http');
 ---
 
 <section class="sec" id="contact" data-hue={hue}>
@@ -18,14 +18,14 @@ const isExternal = (href: string) => href.startsWith('http');
     {
       contact.links.map((link) => (
         <a
-          href={link.href}
+          href={link.href ?? undefined}
           target={isExternal(link.href) ? '_blank' : undefined}
           rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
         >
           <Icon name={link.icon} size={17} />
           <k>{link.label}</k>
           <span class="val">{link.value}</span>
-          {link.href !== '#' && <em>↗</em>}
+          {link.href && <em>↗</em>}
         </a>
       ))
     }

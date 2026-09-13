@@ -54,7 +54,7 @@ void main(){
 
   float h0=u_hue/360.0;
   vec3 c1=hsl2rgb(vec3(fract(h0),0.85,0.55));
-  vec3 c2=hsl2rgb(vec3(fract(h0+0.17),0.80,0.48));
+  vec3 c2=hsl2rgb(vec3(fract(h0+0.06),0.80,0.48));
   vec3 col=mix(c1,c2,clamp(length(r),0.0,1.0));
   col *= smoothstep(0.05,1.05,f)*0.5;
 

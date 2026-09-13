@@ -5,7 +5,8 @@
  */
 class SoundEngine {
   private ctx: AudioContext | null = null;
-  private enabled = true;
+  /** off until the visitor asks — sound on hover is not something to spring on anyone */
+  private enabled = false;
   private lastHover = 0;
 
   private get context(): AudioContext | null {
