@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mohsen Serajian — Senior Backend Engineer</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #14191f;
+    --body: #333b44;
+    --muted: #6b7580;
+    --line: #dfe3e7;
+    --accent: #0c6b72;
+    --accent-soft: #e6f2f2;
+    --ask: #fff1b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8.9pt;
+    line-height: 1.45;
+    color: var(--body);
+    background: #fff;
+  }
+  .mono { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; }
+  .page { width: 210mm; padding: 12mm 14mm 10mm; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ───────── header ───────── */
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8mm;
+    align-items: end;
+    padding-bottom: 4.5mm;
+    border-bottom: 1.4pt solid var(--ink);
+  }
+  h1 {
+    font-size: 25pt;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .role {
+    margin-top: 1.6mm;
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .contact {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1.1mm 6mm;
+    font-size: 8.2pt;
+    color: var(--body);
+  }
+  .contact span { white-space: nowrap; }
+  .contact b { display: inline-block; width: 17.5mm; font-weight: 600; color: var(--muted); font-size: 6.8pt; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ───────── layout ───────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 52mm;
+    gap: 8mm;
+    margin-top: 5.5mm;
+  }
+  section + section { margin-top: 5.2mm; }
+  h2 {
+    font-size: 7.4pt;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 1.4mm;
+    margin-bottom: 2.8mm;
+    border-bottom: 0.6pt solid var(--line);
+  }
+  p.lead { font-size: 9.3pt; line-height: 1.5; color: var(--ink); }
+
+  /* ───────── jobs ───────── */
+  .job + .job { margin-top: 4.6mm; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 3mm;
+  }
+  h3 { font-size: 10.4pt; font-weight: 600; color: var(--ink); }
+  h3 .at { font-weight: 500; color: var(--accent); }
+  .when { font-size: 7.6pt; color: var(--muted); white-space: nowrap; }
+  .job-sub { margin-top: 0.6mm; color: var(--muted); font-size: 8.4pt; }
+
+  .product { margin-top: 2.8mm; break-inside: avoid; }
+  .product h4 {
+    font-size: 8.9pt;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+  }
+  .product h4 .metric {
+    font-size: 7.2pt;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 1mm;
+    padding: 0.2mm 1.4mm;
+  }
+  ul { list-style: none; margin-top: 1.2mm; }
+  li { position: relative; padding-left: 3.6mm; }
+  li + li { margin-top: 0.8mm; }
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0.4mm; top: 0.62em;
+    width: 1.3mm; height: 1.3mm;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.55;
+  }
+
+  /* ───────── projects ───────── */
+  .proj { break-inside: avoid; }
+  .proj + .proj { margin-top: 3.2mm; }
+  .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 3mm; }
+  .proj-head h3 { font-size: 9.6pt; }
+  .proj-head .url { font-size: 7.4pt; color: var(--accent); white-space: nowrap; }
+  .proj p { margin-top: 0.8mm; }
+  .stack { margin-top: 1mm; font-size: 7.4pt; color: var(--muted); }
+  .also { margin-top: 3.2mm; font-size: 8.2pt; color: var(--muted); }
+  .also b { color: var(--ink); font-weight: 600; }
+
+  /* ───────── sidebar ───────── */
+  aside section + section { margin-top: 5.2mm; }
+  .skill + .skill { margin-top: 2.6mm; }
+  .skill h5 {
+    font-size: 7.2pt;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin-bottom: 1mm;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 1mm; }
+  .chips span {
+    font-size: 7.4pt;
+    line-height: 1.3;
+    padding: 0.5mm 1.5mm;
+    border: 0.6pt solid var(--line);
+    border-radius: 1mm;
+    color: var(--body);
+    white-space: nowrap;
+  }
+  .chips span.core { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .fact + .fact { margin-top: 2.4mm; }
+  .fact .k { font-weight: 600; color: var(--ink); }
+  .fact .v { color: var(--muted); font-size: 8.2pt; }
+
+  .ask { background: var(--ask); border-radius: 0.8mm; padding: 0 0.6mm; }
+
+  .p2 { break-before: page; padding-top: 13mm; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <h1>Mohsen Serajian</h1>
+      <div class="role">Senior Backend Engineer · Go</div>
+      </div>
+    <div class="contact">
+      <span><b>Based in</b>Istanbul, Türkiye</span>
+      <span><b>Email</b>serajian.mohsen@gmail.com</span>
+      <span><b>Web</b>mohsenserajian.ir</span>
+      <span><b>GitHub</b>github.com/Serajian</span>
+      <span><b>LinkedIn</b>in/mohsen-serajian</span>
+      <span><b>Telegram</b>@mohsenserajian</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <main>
+      <section>
+        <h2>Profile</h2>
+        <p class="lead">
+          Backend engineer with eight years in production, mostly on consumer platforms with
+          millions of users. I build Go services for video, live sports and
+          real-time messaging: a short-video backend taking 100k+ uploads a day, a gamification
+          platform for 3M+ users, and chat infrastructure holding 800k+ concurrent connections.
+          Before that, national-scale systems for Iran's Ministry of Education. I care about domain
+          boundaries that survive a rewrite, event-driven flows that degrade instead of collapsing,
+          and code the next engineer can follow.
+        </p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+
+        <div class="job">
+          <div class="job-head">
+            <h3>Senior Backend Engineer <span class="at">· Saba Idea</span></h3>
+            <span class="when mono">Jan 2023 – Present · Remote</span>
+          </div>
+          <div class="job-sub">Backend services for Aparat, Saba Idea's video platform, and the products built around it.</div>
+
+          <div class="product">
+            <h4>Aparat Shorts <span class="metric mono">100k+ uploads / day</span></h4>
+            <ul>
+              <li>Designed and built the backend for a Reels-style short-video feed: upload, processing and delivery.</li>
+              <li>Kept it predictable under that load while the product shipped weekly, working with frontend and product teams on the hot paths.</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <h4>Game Club · Aparat Sport <span class="metric mono">3M+ users</span></h4>
+            <ul>
+              <li>Led backend development of a gamification platform on live sports: scoring, predictions, quizzes, missions, leagues and rankings.</li>
+              <li>Built the processing on Kafka event flows and asynchronous workflows.</li>
+              <li>Designed capacity for the traffic spike that lands the moment a match kicks off.</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <h4>Apollo Cast <span class="metric mono">real-time</span></h4>
+            <ul>
+              <li>Built a real-time service that turns a phone into a remote control and a TV into the screen.</li>
+              <li>WebSocket transport with device pairing and state sync, where anything past a few hundred milliseconds is felt.</li>
+            </ul>
+          </div>
+
+          <div class="product">
+            <h4>Chat Service · Hamoon gateway <span class="metric mono">800k+ concurrent connections</span></h4>
+            <ul>
+              <li>Built chat APIs and messaging workflows for text across Aparat channels.</li>
+              <li>Built Hamoon, the WebSocket gateway underneath: it holds client connections, produces events into Kafka for other services and delivers their replies back to clients.</li>
+              <li>Scales horizontally across pods on Kafka consumer groups, with graceful shutdown; stable at 800k+ concurrent connections without tail latency creeping up.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <h3>Backend Developer <span class="at">· Raya Dars</span></h3>
+            <span class="when mono">Dec 2021 – Jan 2023 · On-site</span>
+          </div>
+          <div class="job-sub">Contractor to Iran's Ministry of Education, the country's largest government organisation.</div>
+          <ul>
+            <li>Built national-scale services for financial aid, loans, registration and core administration.</li>
+            <li>Built for systems that could not go down: stability and data integrity came first.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-head">
+            <h3>Full-Stack Developer <span class="at">· Zenouzi</span></h3>
+            <span class="when mono">Aug 2018 – Nov 2021 · On-site</span>
+          </div>
+          <ul>
+            <li>Built a product showcase and sales application for medical equipment in JavaScript, front end to back end, with reliability and maintainability as the standing priorities.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <section>
+        <h2>Skills</h2>
+        <div class="skill">
+          <h5>Languages</h5>
+          <div class="chips"><span class="core">Go</span><span>TypeScript</span><span>JavaScript</span><span>SQL</span></div>
+        </div>
+        <div class="skill">
+          <h5>Architecture</h5>
+          <div class="chips"><span class="core">Domain-Driven Design</span><span class="core">Clean / Hexagonal</span><span class="core">Microservices</span><span>Event-driven</span><span>REST</span><span>gRPC</span><span>WebSocket</span><span>High-traffic &amp; spikes</span></div>
+        </div>
+        <div class="skill">
+          <h5>Data</h5>
+          <div class="chips"><span class="core">PostgreSQL</span><span class="core">Redis</span><span class="core">ScyllaDB</span><span>Cassandra</span><span>MongoDB</span><span>MySQL</span></div>
+        </div>
+        <div class="skill">
+          <h5>Messaging &amp; platform</h5>
+          <div class="chips"><span class="core">Kafka</span><span>NATS JetStream</span><span class="core">Docker</span><span>Kubernetes</span><span>Linux</span><span>GitLab CI</span><span>GitHub Actions</span></div>
+        </div>
+        <div class="skill">
+          <h5>Observability &amp; testing</h5>
+          <div class="chips"><span>OpenTelemetry</span><span class="core">Jaeger</span><span>Grafana</span><span>pprof</span><span>Benchmarks</span><span>testify</span><span>Integration tests</span></div>
+        </div>
+        <div class="skill">
+          <h5>Blockchain · personal projects</h5>
+          <div class="chips"><span>Solidity</span><span>go-ethereum</span><span>EVM</span><span>Event indexers</span><span>Node operations</span><span>Wallet &amp; key management</span><span>TON</span><span>Solana</span><span>Cosmos</span></div>
+        </div>
+        <div class="skill">
+          <h5>Leadership</h5>
+          <div class="chips"><span>Technical leadership</span><span>Mentoring</span><span>Code review</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="fact">
+          <div class="k">B.Sc. Industrial Engineering</div>
+          <div class="v">Islamic Azad University, South Tehran Branch</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <div class="fact"><div class="k">Persian</div><div class="v">Native</div></div>
+        <div class="fact"><div class="k">English</div><div class="v">Upper intermediate (B2)</div></div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="p2">
+    <section>
+      <h2>Selected projects</h2>
+
+      <div class="proj">
+        <div class="proj-head">
+          <h3>Wishly <span class="at">· my own product</span></h3>
+          <span class="url mono">wishly.info</span>
+        </div>
+        <p>Wishlists and birthday reminders. Friends see what someone wants without spoilers or duplicates, and get a nudge by email or SMS a few days ahead. Available in three languages, Persian included.</p>
+        <div class="stack mono">Go · TypeScript</div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <h3>Homa <span class="at">· peer-to-peer terminal chat</span></h3>
+          <span class="url mono">github.com/Serajian/homa</span>
+        </div>
+        <p>Two people exchange one address and talk directly over WireGuard through NAT, on Tailscale's data plane with the control plane removed; a relay only helps when no direct path exists. No accounts and no server keeping messages. Peers are identified by key rather than by the name they announce, and file transfers are checked against a digest. Released as v0.1.0 through Homebrew and a signed apt repository.</p>
+        <div class="stack mono">Go · WireGuard · tailcat · GoReleaser · GitHub Actions</div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-head">
+          <h3>Srosha <span class="at">· asynchronous notification service</span></h3>
+          <span class="url mono">github.com/Serajian/srosha</span>
+        </div>
+        <p>A client submits once over gRPC and is acknowledged immediately; a separate dispatcher delivers across eight channels (Email, Telegram, Bale, WhatsApp, Matrix, Gotify, FCM, APNs) at least once, with per-channel retry and HMAC-signed status webhooks. Intake and delivery are separate binaries, so a broken provider never stops a request being accepted. Hexagonal core with the dependency rule checked on every commit, and a Go SDK that stays one toolchain version behind the service.</p>
+        <div class="stack mono">Go · gRPC · PostgreSQL · NATS JetStream · Docker</div>
+      </div>
+
+    </section>
+  </div>
+
+</div>
+</body>
+</html>

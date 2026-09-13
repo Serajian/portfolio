@@ -93,6 +93,18 @@ node scripts/make-og.mjs
 
 Re-run it after changing the name, role or domain — the strings at the top of
 that script are kept in step with `site.ts` by hand, since it runs rarely.
+
+### The CV
+
+`public/Mohsen-Serajian-Resume.pdf` is generated as well, from
+`scripts/resume/resume.html`:
+
+```bash
+node scripts/make-resume.mjs
+```
+
+It needs Google Chrome. The layout is sized for two A4 pages and the script
+prints the page count, so a line that pushes it onto a third shows up at once.
 `robots.txt` and `sitemap.xml` are generated at build time from the canonical
 domain, so those can never drift out of sync.
 
