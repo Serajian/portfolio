@@ -105,6 +105,20 @@ node scripts/make-resume.mjs
 
 It needs Google Chrome. The layout is sized for two A4 pages and the script
 prints the page count, so a line that pushes it onto a third shows up at once.
+
+### Visitor and CV stats
+
+Visits and CV downloads per day, from Cloudflare's own request logs:
+
+```bash
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ZONE_ID=… node scripts/stats.mjs 7
+```
+
+The CV is cached at Cloudflare's edge, so the server's access log misses most
+downloads, and Web Analytics only counts HTML pages. The token needs
+Zone → Analytics → Read; the zone ID is on the domain's Overview page. How many
+days back it can go depends on the plan, and the script says when it had to
+stop short.
 `robots.txt` and `sitemap.xml` are generated at build time from the canonical
 domain, so those can never drift out of sync.
 
