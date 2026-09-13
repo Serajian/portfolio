@@ -45,6 +45,7 @@ employers, projects, photo and CV. All of it has to go.
 | social card name/role/domain        | `scripts/make-og.mjs`                 |
 | photo                               | `src/assets/me.png`                   |
 | CV                                  | `public/Mohsen-Serajian-Resume.pdf`   |
+| CV source                           | `scripts/resume/resume.html`          |
 
 Nothing else needs touching to make the site yours — layout, animation and
 styling are all independent of the content.
@@ -145,6 +146,7 @@ both names, or delete the block if there is only one domain.
 | ------- | ----------------------------------- | -------------------------------------------- |
 | photo   | `src/assets/me.png`                 | overwrite; Astro re-encodes to webp, 3 widths |
 | CV      | `public/Mohsen-Serajian-Resume.pdf` | **delete it**, add your own, update `cv.href` |
+| CV source | `scripts/resume/resume.html`      | delete it, or rewrite it and run `node scripts/make-resume.mjs` |
 | favicon | `public/favicon.svg`                | generic terminal mark — change if you like    |
 
 The photo frame is landscape and the subject stands in it, bottom-aligned,
@@ -185,7 +187,8 @@ pnpm build && grep -ric "mohsen\|serajian" dist/index.html
 
 That has to be `0`.
 
-Also make sure the old CV and photo are gone from `public/` and `src/assets/`.
+Also make sure the old CV and photo are gone from `public/` and `src/assets/`,
+and the CV source from `scripts/resume/`.
 
 ---
 
