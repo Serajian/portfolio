@@ -53,6 +53,16 @@ export interface Project {
   href: string | null;
 }
 
+export interface LiveSite {
+  name: string;
+  /** hostname without the scheme — it is the address, not a link label */
+  host: string;
+  body: string;
+  href: string;
+  /** true marks the content as Persian, so a visitor knows before clicking */
+  fa?: boolean;
+}
+
 export interface ContactLink {
   label: string;
   value: string;
@@ -109,6 +119,7 @@ export const site = {
     { id: 'skills', label: 'SKILLS', hue: 42 },
     { id: 'services', label: 'SERVICES', hue: 152 },
     { id: 'projects', label: 'PROJECTS', hue: 20 },
+    { id: 'live', label: 'LIVE', hue: 238 },
     { id: 'contact', label: 'CONTACT', hue: 96 },
   ] satisfies NavItem[],
 
@@ -360,12 +371,6 @@ export const site = {
         body: 'An asynchronous notification service. One gRPC call is acknowledged immediately, then delivered out of band across eight channels, at least once, with per-channel retry. Intake and delivery scale apart, so a dead provider never blocks a new request.',
         href: 'https://github.com/Serajian/srosha',
       },
-      {
-        code: '009 / DEZHNEBESHT',
-        title: 'Dezhnebesht',
-        body: 'A bilingual encyclopedia of the things I kept re-explaining — Persian and English, side by side. Add one JSON object and the index, live search, categories, hashtags and cross-links derive themselves. No framework, no npm, no build step: plain ES modules on a static host.',
-        href: 'https://learn.mohsenserajian.ir',
-      },
     ] satisfies Project[],
     /** the dashed card that closes the row — {years} is filled from CAREER_START */
     outro: {
@@ -376,9 +381,36 @@ export const site = {
     },
   },
 
+  /* ─────────── live sites of my own ─────────── */
+  /* Not client work and not case studies, so they are kept out of selected
+     work: free sites I run myself and send people to. A directory listing
+     rather than cards — the address is the point. */
+  live: {
+    overline: '// 06 — elsewhere',
+    heading: { lead: 'Also', dim: 'live' },
+    intro:
+      'Small sites of my own, free and public. Mostly Persian, mostly things I got tired of explaining twice.',
+    items: [
+      {
+        name: 'Dezhnebesht',
+        host: 'learn.mohsenserajian.ir',
+        body: 'A bilingual encyclopedia — Persian and English, side by side.',
+        href: 'https://learn.mohsenserajian.ir',
+        fa: true,
+      },
+      {
+        name: 'Bookshelf',
+        host: 'books.mohsenserajian.ir',
+        body: 'Programming books as narrated, animated Persian lessons.',
+        href: 'https://books.mohsenserajian.ir',
+        fa: true,
+      },
+    ] satisfies LiveSite[],
+  },
+
   /* ─────────── contact ─────────── */
   contact: {
-    overline: '// 06 — location',
+    overline: '// 07 — location',
     heading: { lead: 'Contact', dim: 'me' },
     links: [
       {

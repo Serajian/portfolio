@@ -93,8 +93,8 @@ Collect the answers in one go. Anything left unanswered stays someone else's.
 ### `src/data/site.ts`
 
 Every string, in the order it appears on the page: `meta`, `nav`, `hero`,
-`ticker`, `about`, `skills`, `services`, `projects`, `contact`, `socials`,
-`footer`, `boot`. The comments explain each field.
+`ticker`, `about`, `skills`, `services`, `projects`, `live`, `contact`,
+`socials`, `footer`, `boot`. The comments explain each field.
 
 Worth knowing while you edit:
 
