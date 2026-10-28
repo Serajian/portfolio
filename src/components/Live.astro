@@ -1,0 +1,37 @@
+---
+import { site } from '../data/site';
+import SectionHead from './SectionHead.astro';
+
+const { live, nav } = site;
+const hue = nav.find((n) => n.id === 'live')?.hue ?? 238;
+---
+
+{/* same row grammar as the contact list — these are addresses, not case studies */}
+<section class="sec" id="live" data-hue={hue}>
+  <SectionHead overline={live.overline} lead={live.heading.lead} dim={live.heading.dim} />
+
+  <p class="contact-lead rv">{live.intro}</p>
+
+  <div class="cinfo live rv">
+    {
+      live.items.map((item, i) => (
+        <a href={item.href} target="_blank" rel="noopener noreferrer">
+          <span class="glyph" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span class="meat">
+            <span class="name">{item.name}</span>
+            {item.fa && (
+              <span class="fa" title="Persian">
+                fa
+              </span>
+            )}
+            <span class="val">{item.body}</span>
+          </span>
+          <span class="host">{item.host}</span>
+          <em>↗</em>
+        </a>
+      ))
+    }
+  </div>
+</section>

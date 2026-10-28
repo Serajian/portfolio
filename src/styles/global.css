@@ -1635,6 +1635,84 @@ h1 .ln.g::after {
     display: none;
   }
 }
+/* ── LIVE ──────────────────────────────────────────────────────────
+   The contact rows' hover grammar, but two lines deep: the name carries
+   the row and the address sits on the right, so it reads like a listing
+   of addresses rather than a footnote under the heading. */
+.live a {
+  padding: 26px 4px;
+}
+/* the same two-digit index the rail and the project codes use */
+.live a .glyph {
+  flex: none;
+  width: 22px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color 0.25s;
+}
+.live a:hover .glyph {
+  color: var(--accent);
+}
+.live a .meat {
+  flex: 1;
+  min-width: 0;
+}
+.live a .name {
+  font-family: 'Geist Variable', var(--sans);
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  transition: color 0.25s;
+}
+.live a:hover .name {
+  color: var(--accent);
+}
+/* tells a visitor the content is Persian before they spend a click on it */
+.live a .fa {
+  margin-left: 10px;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  vertical-align: 3px;
+}
+.live a .val {
+  display: block;
+  max-width: 62ch;
+  margin-top: 7px;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: normal;
+}
+.live a .host {
+  flex: none;
+  font-size: 11.5px;
+  color: var(--muted);
+  transition: color 0.25s;
+}
+.live a:hover .host {
+  color: var(--text);
+}
+
+@media (max-width: 860px) {
+  .live a {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  /* keeps the index on the name's line once the row goes three lines deep */
+  .live a .glyph {
+    margin-top: 6px;
+  }
+  /* the address drops under the text rather than squeezing the row */
+  .live a .host {
+    order: 3;
+    flex-basis: 100%;
+    margin: 10px 0 0 38px;
+  }
+}
 footer {
   margin-left: var(--rail);
   padding: 36px var(--pad);
